@@ -31,11 +31,11 @@ a survival::Surv() object from the server side environment.
 returns a summary of the Cox proportional hazards from the server side environment.
 }
 \details{
-Serverside assign function {SurvDS} called by clientside function.
-{ds.Surv}.
+Serverside assign function \code{SurvDS} called by clientside function.
+\code{ds.Surv}.
 returns a Survival object for use in Cox proportional hazards from the server side environment from the server side environment.
 This request is not disclosive as it only returns a string.
-For further details see help for {ds.Surv} function.
+For further details see help for \code{ds.Surv} function.
 }
 \author{
 Soumya Banerjee and Tom Bishop (2021).

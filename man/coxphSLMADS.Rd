@@ -52,11 +52,11 @@ a summary of the Cox proportional hazards from the server side environment from 
 returns a summary of the Cox proportional hazards from the server side environment.
 }
 \details{
-Serverside aggregate function {coxphSLMADS} called by clientside function.
-{ds.coxphSLMA}.
+Serverside aggregate function \code{coxphSLMADS} called by clientside function.
+\code{ds.coxphSLMA}.
 returns a summary of the Cox proportional hazards from the server side environment from the server side environment.
 This request is not disclosive as it only returns a string.
-For further details see help for {ds.coxphSLMA} function.
+For further details see help for \code{ds.coxphSLMA} function.
 }
 \author{
 Soumya Banerjee and Tom Bishop (2020).

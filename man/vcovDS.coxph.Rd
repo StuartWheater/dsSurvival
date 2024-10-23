@@ -16,12 +16,12 @@ a variance-covariance matrix.
 returns a variance-covariance matrix of Cox Proportional Hazard model from the server side environment.
 }
 \details{
-Serverside aggregate function {vcovDS.coxph} called by clientside function 
-{ds.vcov.coxph}.
+Serverside aggregate function \code{vcovDS.coxph} called by clientside function 
+\code{ds.vcov.coxph}.
 returns a list which contains a variance-covariance matrix for a Cox model.
 This request is not disclosive, because the disclosure checks should be performed in the main function for building
 the Cox model (e.g. checking for over saturation).
-For further details see help for the native {vcov} function.
+For further details see help for the native \code{vcov} function.
 }
 \author{
 Soumya Banerjee and Tom Bishop (2022).

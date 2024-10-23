@@ -1,11 +1,11 @@
 #' 
 #' @title Performs survival analysis using the Cox proportional hazards model at the serverside environment.
 #' @description returns a summary of the Cox proportional hazards from the server side environment.
-#' @details Serverside aggregate function {coxphSLMADS} called by clientside function.
-#' {ds.coxphSLMA}.
+#' @details Serverside aggregate function \code{coxphSLMADS} called by clientside function.
+#' \code{ds.coxphSLMA}.
 #' returns a summary of the Cox proportional hazards from the server side environment from the server side environment.
 #' This request is not disclosive as it only returns a string.
-#' For further details see help for {ds.coxphSLMA} function.
+#' For further details see help for \code{ds.coxphSLMA} function.
 #' @param formula either NULL or a character string (potentially including '*'
 #' wildcards) specifying a formula.
 #' @param dataName character string of name of data frame

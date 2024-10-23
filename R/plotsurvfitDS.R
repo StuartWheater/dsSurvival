@@ -1,11 +1,11 @@
 #' 
 #' @title Performs plotting of survival analysis curves.
 #' @description returns a privacy preserving survival curve.
-#' @details Serverside aggregate function {plotsurvfitDS} called by clientside function.
-#' {ds.plotsurvfit}.
+#' @details Serverside aggregate function \code{plotsurvfitDS} called by clientside function.
+#' \code{ds.plotsurvfit}.
 #' returns a privacy preserving survival curve from the server side environment.
 #' This request is not disclosive as it is randomized.
-#' For further details see help for {ds.plotsurvfit} function.
+#' For further details see help for \code{ds.plotsurvfit} function.
 #' @param formula a character string which has the name of server-side survfit() object.
 #'		This should be created using a call to ds.survfit()
 #' @param dataName character string of name of data frame

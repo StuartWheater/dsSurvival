@@ -1,11 +1,11 @@
 #' 
 #' @title Performs survival analysis using the Cox proportional hazards model at the serverside environment.
 #' @description Performs survival analysis using the Cox proportional hazards models and stores the model on the server side environment.
-#' @details Serverside assign function {coxphSLMAassignDS} called by clientside function.
-#' {ds.coxphSLMAassign}.
+#' @details Serverside assign function \code{coxphSLMAassignDS} called by clientside function.
+#' \code{ds.coxphSLMAassign}.
 #' stores the Cox proportional hazards in the server side environment
 #' This request is not disclosive as it only returns a string.
-#' For further details see help for {ds.coxphSLMAassign} function.
+#' For further details see help for \code{ds.coxphSLMAassign} function.
 #' @param formula either NULL or a character string (potentially including '*'
 #' wildcards) specifying a formula.
 #' @param dataName character string of name of data frame

@@ -42,12 +42,12 @@ Cox proportional hazards that has been fit and saved on the
 server side environment.
 }
 \details{
-Serverside aggregate function {cox.zphSLMADS} called by clientside function.
-{ds.cox.zphSLMA}.
+Serverside aggregate function \code{cox.zphSLMADS} called by clientside function.
+\code{ds.cox.zphSLMA}.
 returns diagnostics for the test of proportional hazards assumptions
 from a Cox proportional hazards model.
 This request is not disclosive as it only returns summary statistics.
-For further details see help for {ds.cox.zphSLMA} function.
+For further details see help for \code{ds.cox.zphSLMA} function.
 }
 \author{
 Soumya Banerjee and Tom Bishop (2020).

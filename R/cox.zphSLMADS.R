@@ -4,12 +4,12 @@
 #' @description Tests the proportional hazards assumption of a 
 #'	Cox proportional hazards that has been fit and saved on the
 #'	server side environment.
-#' @details Serverside aggregate function {cox.zphSLMADS} called by clientside function.
-#' {ds.cox.zphSLMA}.
+#' @details Serverside aggregate function \code{cox.zphSLMADS} called by clientside function.
+#' \code{ds.cox.zphSLMA}.
 #' returns diagnostics for the test of proportional hazards assumptions
 #'	from a Cox proportional hazards model.
 #' This request is not disclosive as it only returns summary statistics.
-#' For further details see help for {ds.cox.zphSLMA} function.
+#' For further details see help for \code{ds.cox.zphSLMA} function.
 #' @param fit character string specifying name of fit Cox proportional 
 #'	hazards model saved in the server-side.
 #' @param transform character string specifying how the survival times should be transformed

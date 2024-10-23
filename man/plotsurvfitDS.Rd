@@ -19,11 +19,11 @@ a privacy preserving survival curve from the server side environment.
 returns a privacy preserving survival curve.
 }
 \details{
-Serverside aggregate function {plotsurvfitDS} called by clientside function.
-{ds.plotsurvfit}.
+Serverside aggregate function \code{plotsurvfitDS} called by clientside function.
+\code{ds.plotsurvfit}.
 returns a privacy preserving survival curve from the server side environment.
 This request is not disclosive as it is randomized.
-For further details see help for {ds.plotsurvfit} function.
+For further details see help for \code{ds.plotsurvfit} function.
 }
 \author{
 Soumya Banerjee, Demetris Avraam, Paul Burton and Tom RP Bishop (2022).

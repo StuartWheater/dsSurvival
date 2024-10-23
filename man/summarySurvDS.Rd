@@ -16,12 +16,12 @@ a list which is a summary of server-side survival model.
 returns a summary of the survival Surv() object from the server side environment.
 }
 \details{
-Serverside aggregate function {coxphSLMADS} called by clientside function 
-{ds.summary}.
+Serverside aggregate function \code{coxphSLMADS} called by clientside function 
+\code{ds.summary}.
 returns a list which is summary of the survival Surv() object. The list has the summary of the time
   and event parameter in the survival object.
 This request is not disclosive.
-For further details see help for {ds.summary} function.
+For further details see help for \code{ds.summary} function.
 }
 \author{
 Soumya Banerjee and Tom Bishop (2021).

@@ -1,11 +1,11 @@
 #' 
 #' @title Creates a survival object for survival analysis using the Cox proportional hazards model at the serverside environment
 #' @description returns a summary of the Cox proportional hazards from the server side environment.
-#' @details Serverside assign function {SurvDS} called by clientside function.
-#' {ds.Surv}.
+#' @details Serverside assign function \code{SurvDS} called by clientside function.
+#' \code{ds.Surv}.
 #' returns a Survival object for use in Cox proportional hazards from the server side environment from the server side environment.
 #' This request is not disclosive as it only returns a string.
-#' For further details see help for {ds.Surv} function.
+#' For further details see help for \code{ds.Surv} function.
 #' @param time name of start time or follow-up time parameter to be passed to Surv(). 
 #'      Should be a character string.
 #' @param time2 name of stop time parameter to be passed to Surv(). 

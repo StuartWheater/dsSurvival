@@ -20,11 +20,11 @@ creates a survfit survival object in the server side environment.
 creates a survfit survival object in the server side environment.
 }
 \details{
-Serverside assign function {survfitDS} called by clientside function.
-{ds.survfit}.
+Serverside assign function \code{survfitDS} called by clientside function.
+\code{ds.survfit}.
 creates a survfit survival object in the server side environment
 This request is not disclosive.
-For further details see help for {ds.survfit} function.
+For further details see help for \code{ds.survfit} function.
 }
 \author{
 Soumya Banerjee and Tom Bishop (2020).
