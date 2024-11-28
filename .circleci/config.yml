@@ -31,6 +31,7 @@ jobs:
               sudo apt-get install -y libpng-dev
               sudo apt-get install -y libtiff5-dev
               sudo apt-get install -y libjpeg-dev
+              sudo apt-get install -y libgdal-dev
       - run:
           command: |
               sudo Rscript -e "install.packages('RANN', dependencies=TRUE)"
@@ -39,6 +40,7 @@ jobs:
               sudo Rscript -e "install.packages('ggplot2', dependencies=TRUE)"
               sudo Rscript -e "install.packages('dplyr', dependencies=TRUE)"
               sudo Rscript -e "install.packages('reshape2', dependencies=TRUE)"
+              sudo Rscript -e "install.packages('MatrixModels', dependencies=TRUE)"
               sudo Rscript -e "install.packages('dsBase', dependencies=TRUE)"
               sudo Rscript -e "install.packages('fANCOVA', dependencies=TRUE)"
 
