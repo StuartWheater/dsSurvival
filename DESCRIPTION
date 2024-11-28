@@ -16,5 +16,7 @@ Imports:
     reshape2,
     dsBase,
     fANCOVA
+Suggests:
+    lme4
 RoxygenNote: 7.3.2
 Encoding: UTF-8
