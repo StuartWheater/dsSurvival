@@ -1,0 +1,46 @@
+# Copyright (c) 2024 Arjuna Technologies, Newcastle upon Tyne. All rights reserved.
+
+version: 2.1
+
+jobs:
+  dssurvival:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layout_caching: true
+      - run: |
+          echo "Building"
+          echo "  Repo Name: " $CIRCLE_PROJECT_REPONAME
+          echo "  Branch:    " $CIRCLE_BRANCH
+          echo "  Tag:       " $CIRCLE_TAG
+      - run:
+          command: |
+              sudo apt-get update -y
+              sudo apt-get install -y r-base-core cmake
+      - run:
+          command: |
+              sudo apt-get install -y libxml2-dev
+      - run:
+          command: |
+              sudo Rscript -e "install.packages('RANN', dependencies=TRUE)"
+              sudo Rscript -e "install.packages('stringr', dependencies=TRUE)"
+              sudo Rscript -e "install.packages('survival', dependencies=TRUE)"
+              sudo Rscript -e "install.packages('ggplot2', dependencies=TRUE)"
+              sudo Rscript -e "install.packages('', dependencies=TRUE)"
+              sudo Rscript -e "install.packages('dplyr', dependencies=TRUE)"
+              sudo Rscript -e "install.packages('reshape2', dependencies=TRUE)"
+              sudo Rscript -e "install.packages('dsBase', dependencies=TRUE)"
+              sudo Rscript -e "install.packages('fANCOVA', dependencies=TRUE)"
+
+              sudo Rscript -e "install.packages('lme4', dependencies=TRUE)"
+              sudo Rscript -e "install.packages('covr', dependencies=TRUE)"
+      - run:
+          command: |
+              sudo Rscript -e 'library(covr); covr::codecov(token = "'$CODECOV_TOKEN'")'
+workflows:
+  build:
+    jobs:
+      - dssurvival
