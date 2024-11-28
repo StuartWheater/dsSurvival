@@ -27,13 +27,16 @@ jobs:
               sudo apt-get install -y libfontconfig1-dev
               sudo apt-get install -y libharfbuzz-dev
               sudo apt-get install -y libfribidi-dev
+              sudo apt-get install -y libfreetype6-dev
+              sudo apt-get install -y libpng-dev
+              sudo apt-get install -y libtiff5-dev
+              sudo apt-get install -y libjpeg-dev
       - run:
           command: |
               sudo Rscript -e "install.packages('RANN', dependencies=TRUE)"
               sudo Rscript -e "install.packages('stringr', dependencies=TRUE)"
               sudo Rscript -e "install.packages('survival', dependencies=TRUE)"
               sudo Rscript -e "install.packages('ggplot2', dependencies=TRUE)"
-              sudo Rscript -e "install.packages('', dependencies=TRUE)"
               sudo Rscript -e "install.packages('dplyr', dependencies=TRUE)"
               sudo Rscript -e "install.packages('reshape2', dependencies=TRUE)"
               sudo Rscript -e "install.packages('dsBase', dependencies=TRUE)"
