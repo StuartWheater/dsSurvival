@@ -20,6 +20,7 @@ jobs:
           command: |
               sudo apt-get update -y
               sudo apt-get install -y r-base-core cmake
+              sudo apt-get remove -y libmariadb-dev libmariadb-dev-compat
       - run:
           command: |
               sudo apt-get install -y libxml2-dev
