@@ -44,7 +44,6 @@ jobs:
               sudo Rscript -e "install.packages('dplyr', dependencies=TRUE)"
               sudo Rscript -e "install.packages('reshape2', dependencies=TRUE)"
               sudo Rscript -e "install.packages('MatrixModels', dependencies=TRUE)"
-#              sudo Rscript -e "install.packages('dsBase', dependencies=TRUE)"
               sudo Rscript -e "remotes::install_github('datashield/dsBase@6.3.1')"
               sudo Rscript -e "install.packages('fANCOVA', dependencies=TRUE)"
 
