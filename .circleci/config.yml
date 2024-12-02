@@ -35,6 +35,8 @@ jobs:
               sudo apt-get install -y libgdal-dev
       - run:
           command: |
+              sudo Rscript -e "install.packages('remotes', dependencies=TRUE)"
+
               sudo Rscript -e "install.packages('RANN', dependencies=TRUE)"
               sudo Rscript -e "install.packages('stringr', dependencies=TRUE)"
               sudo Rscript -e "install.packages('survival', dependencies=TRUE)"
@@ -42,7 +44,8 @@ jobs:
               sudo Rscript -e "install.packages('dplyr', dependencies=TRUE)"
               sudo Rscript -e "install.packages('reshape2', dependencies=TRUE)"
               sudo Rscript -e "install.packages('MatrixModels', dependencies=TRUE)"
-              sudo Rscript -e "install.packages('dsBase', dependencies=TRUE)"
+#              sudo Rscript -e "install.packages('dsBase', dependencies=TRUE)"
+              sudo Rscript -e "remotes::install_github('datashield/dsBase@6.3.1')"
               sudo Rscript -e "install.packages('fANCOVA', dependencies=TRUE)"
 
               sudo Rscript -e "install.packages('lme4', dependencies=TRUE)"
