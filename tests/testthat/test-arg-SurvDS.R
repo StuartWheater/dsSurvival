@@ -12,7 +12,7 @@
 # Set up
 #
 
-context("SurvDS::smk::setup")
+context("SurvDS::arg::setup")
 
 set.standard.disclosure.settings()
 
@@ -20,12 +20,12 @@ set.standard.disclosure.settings()
 # Tests
 #
 
-context("SurvDS::smk::no parameters")
+context("SurvDS::arg::no parameters")
 test_that("no parameters SurvDS", {
     expect_error(SurvDS(), "Start time parameter or follow-up time parameter (time) must be numeric or integer.", fixed = TRUE)
 })
 
-context("SurvDS::smk::null parameters")
+context("SurvDS::arg::null parameters")
 test_that("null parameters SurvDS", {
     time   <- NULL
     time2  <- NULL
@@ -36,7 +36,7 @@ test_that("null parameters SurvDS", {
     expect_error(SurvDS(time, time2, event, type, origin), "Start time parameter or follow-up time parameter (time) must be numeric or integer.", fixed = TRUE)
 })
 
-context("SurvDS::smk::valid time parameter")
+context("SurvDS::arg::valid time parameter")
 test_that("valid time parameter SurvDS", {
     time   <- 1234
     time2  <- NULL
@@ -47,7 +47,7 @@ test_that("valid time parameter SurvDS", {
     expect_error(SurvDS(time, time2, event, type, origin), "Event parameter (event) must be numeric or integer or factor.", fixed = TRUE)
 })
 
-context("SurvDS::smk::valid times parameters")
+context("SurvDS::arg::valid times parameters")
 test_that("valid times parameters SurvDS", {
     time   <- 1234
     time2  <- 2345
@@ -58,7 +58,7 @@ test_that("valid times parameters SurvDS", {
     expect_error(SurvDS(time, time2, event, type, origin), "Event parameter (event) must be numeric or integer or factor.", fixed = TRUE)
 })
 
-context("SurvDS::smk::valid times and event parameters")
+context("SurvDS::arg::valid times and event parameters")
 test_that("valid times and event parameters SurvDS", {
     time   <- 1234
     time2  <- 2345
@@ -69,7 +69,7 @@ test_that("valid times and event parameters SurvDS", {
     expect_warning(SurvDS(time, time2, event, type, origin), "Invalid status value, converted to NA", fixed = TRUE)
 })
 
-context("SurvDS::smk::valid time and event parameters")
+context("SurvDS::arg::valid time and event parameters")
 test_that("valid time and event parameters SurvDS", {
     time   <- 1234
     time2  <- NULL
@@ -84,6 +84,6 @@ test_that("valid time and event parameters SurvDS", {
 # Done
 #
 
-context("SurvDS::smk::shutdown")
+context("SurvDS::arg::shutdown")
 
-context("SurvDS::smk::done")
+context("SurvDS::arg::done")
