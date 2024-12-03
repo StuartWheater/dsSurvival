@@ -36,6 +36,17 @@ test_that("null parameters SurvDS", {
     expect_error(SurvDS(time, time2, event, type, origin), "Start time parameter or follow-up time parameter (time) must be numeric or integer.", fixed = TRUE)
 })
 
+context("SurvDS::smk::valid time parameter")
+test_that("valid time parameter SurvDS", {
+    time   <- 1234
+    time2  <- NULL
+    event  <- NULL
+    type   <- NULL
+    origin <- NULL
+
+    expect_error(SurvDS(time, time2, event, type, origin), "Event parameter (event) must be numeric or integer or factor.", fixed = TRUE)
+})
+
 context("SurvDS::smk::valid times parameters")
 test_that("valid times parameters SurvDS", {
     time   <- 1234
@@ -51,6 +62,17 @@ context("SurvDS::smk::valid times and event parameters")
 test_that("valid times and event parameters SurvDS", {
     time   <- 1234
     time2  <- 2345
+    event  <- 1567
+    type   <- NULL
+    origin <- NULL
+
+    expect_warning(SurvDS(time, time2, event, type, origin), "Invalid status value, converted to NA", fixed = TRUE)
+})
+
+context("SurvDS::smk::valid time and event parameters")
+test_that("valid time and event parameters SurvDS", {
+    time   <- 1234
+    time2  <- NULL
     event  <- 1567
     type   <- NULL
     origin <- NULL
