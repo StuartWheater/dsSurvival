@@ -20,6 +20,7 @@ jobs:
           command: |
               sudo apt-get update -y
               sudo apt-get install -y r-base-core cmake
+              sudo apt-get remove -y libmariadb-dev libmariadb-dev-compat
       - run:
           command: |
               sudo apt-get install -y libxml2-dev
@@ -31,22 +32,26 @@ jobs:
               sudo apt-get install -y libpng-dev
               sudo apt-get install -y libtiff5-dev
               sudo apt-get install -y libjpeg-dev
+              sudo apt-get install -y libgdal-dev
       - run:
           command: |
+              sudo Rscript -e "install.packages('remotes', dependencies=TRUE)"
+
               sudo Rscript -e "install.packages('RANN', dependencies=TRUE)"
               sudo Rscript -e "install.packages('stringr', dependencies=TRUE)"
               sudo Rscript -e "install.packages('survival', dependencies=TRUE)"
               sudo Rscript -e "install.packages('ggplot2', dependencies=TRUE)"
               sudo Rscript -e "install.packages('dplyr', dependencies=TRUE)"
               sudo Rscript -e "install.packages('reshape2', dependencies=TRUE)"
-              sudo Rscript -e "install.packages('dsBase', dependencies=TRUE)"
+              sudo Rscript -e "install.packages('MatrixModels', dependencies=TRUE)"
+              sudo Rscript -e "remotes::install_github('datashield/dsBase@6.3.1')"
               sudo Rscript -e "install.packages('fANCOVA', dependencies=TRUE)"
 
               sudo Rscript -e "install.packages('lme4', dependencies=TRUE)"
               sudo Rscript -e "install.packages('covr', dependencies=TRUE)"
       - run:
           command: |
-              sudo Rscript -e 'library(covr); covr::codecov(token = "'$CODECOV_TOKEN'")'
+              sudo Rscript -e 'library(covr); covr::codecov(token = "'$CODECOV_TOKEN'", quiet = FALSE)'
 workflows:
   build:
     jobs:
