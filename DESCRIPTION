@@ -8,15 +8,16 @@ License: GPL-3
 Depends:
     R (>= 3.5.0)
 Imports:
-    RANN,
-    stringr,
     survival (>= 3.2-11),
-    ggplot2,
-    dplyr,
-    reshape2,
     dsBase,
     fANCOVA
 Suggests:
-    lme4
+    RANN,
+    dplyr,
+    ggplot2,
+    reshape2,
+    stringr,
+    lme4,
+    testthat
 RoxygenNote: 7.3.2
 Encoding: UTF-8

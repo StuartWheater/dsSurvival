@@ -3,3 +3,5 @@
 ^.github$
 ^dssurvival lay summary.pdf$
 ^DAGStat_sofack \(1\).pdf$
+^\.circleci$
+^\.circleci/config\.yml$
