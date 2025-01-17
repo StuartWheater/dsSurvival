@@ -1,7 +1,7 @@
 #' 
 #' @title Creates a survival object for survival analysis using the Cox proportional hazards model at the serverside environment
 #' @description returns a summary of the Cox proportional hazards from the server side environment.
-#' @details Serverside assign function \code{SurvDS} called by clientside function.
+#' @details Serverside assign function \code{SurvDS} called by clientside function
 #' \code{ds.Surv}.
 #' returns a Survival object for use in Cox proportional hazards from the server side environment from the server side environment.
 #' This request is not disclosive as it only returns a string.
@@ -21,12 +21,10 @@
 #' @return a survival::Surv() object from the server side environment.
 #' @author Soumya Banerjee and Tom Bishop (2021).
 #' @export
-SurvDS<-function(time = NULL,
-                 time2 = NULL,
-                 event = NULL,
-                 type = NULL, #c('right', 'left', 'interval', 'counting', 'interval2', 'mstate'),
-		 origin = NULL)
-{
+#' 
+SurvDS <- function(time = NULL, time2 = NULL, event = NULL, type = NULL, origin = NULL){
+  
+  
       #########################################################################
       # DataSHIELD MODULE: CAPTURE THE nfilter SETTINGS                       #
       thr <- dsBase::listDisclosureSettingsDS()                               #

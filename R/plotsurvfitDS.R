@@ -1,7 +1,7 @@
 #' 
 #' @title Performs plotting of survival analysis curves.
 #' @description returns a privacy preserving survival curve.
-#' @details Serverside aggregate function \code{plotsurvfitDS} called by clientside function.
+#' @details Serverside aggregate function \code{plotsurvfitDS} called by clientside function
 #' \code{ds.plotsurvfit}.
 #' returns a privacy preserving survival curve from the server side environment.
 #' This request is not disclosive as it is randomized.
