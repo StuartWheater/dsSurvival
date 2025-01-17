@@ -1,5 +1,6 @@
 #-------------------------------------------------------------------------------
-# Copyright (c) 2019-2020 University of Newcastle upon Tyne. All rights reserved.
+# Copyright (c) 2019-2022 University of Newcastle upon Tyne. All rights reserved.
+# Copyright (c) 2024 Arjuna Technologies, Newcastle upon Tyne. All rights reserved.
 #
 # This program and the accompanying materials
 # are made available under the terms of the GNU Public License v3.0.
@@ -12,19 +13,6 @@
 #
 
 context("setup - start")
-
-library(RANN)
-library(nlme)
-library(stringr)
-library(lme4)
-
-library(devtools)
-library(testthat)
-library(dsBase)
-library(dsBaseClient)
-require('DSI')
-require('DSOpal')
-
 
 source("disclosure/set_disclosure_settings.R")
 source("random/set_random_seed_settings.R")
