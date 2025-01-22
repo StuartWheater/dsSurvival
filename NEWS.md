@@ -1,3 +1,4 @@
+## Version 1.0.0
 v1.0.0: A basic first release of survival models in DataSHIELD. This release has Cox proportional hazards models, summaries of models, diagnostics and the ability to meta-analyze hazard ratios. There is also capability to generate forest plots of meta-analyzed hazard ratios. This release supports study-level meta-analysis (SLMA).
 
 
@@ -12,11 +13,14 @@ A shiny graphical user interface for building survival models in DataSHIELD has 
 
 * https://datashield-demo.obiba.org/
 
-
+## Version 1.0.1
 v1.0.1: Minor fixes.
 
+## Version 2.0.0
 v2.0.0: This has privacy preserving survival curves.
 
+## Version 2.1.1
 v2.1.1: Has minor fixes
 
+## Version 2.1.2
 v2.1.2: Has minor fixes

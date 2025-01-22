@@ -4,7 +4,7 @@
 #' @description Tests the proportional hazards assumption of a 
 #'	Cox proportional hazards that has been fit and saved on the
 #'	server side environment.
-#' @details Serverside aggregate function \code{cox.zphSLMADS} called by clientside function.
+#' @details Serverside aggregate function \code{cox.zphSLMADS} called by clientside function
 #' \code{ds.cox.zphSLMA}.
 #' returns diagnostics for the test of proportional hazards assumptions
 #'	from a Cox proportional hazards model.

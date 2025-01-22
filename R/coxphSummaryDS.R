@@ -4,7 +4,7 @@
 #' @description This function returns the summary of a 
 #'	Cox proportional hazards that has been fit and saved on the
 #'	server side environment.
-#' @details Serverside aggregate function \code{coxphSummaryDS} called by clientside function.
+#' @details Serverside aggregate function \code{coxphSummaryDS} called by clientside function
 #' \code{ds.coxphSummary}.
 #' returns the summary from a Cox proportional hazards model.
 #' This request is not disclosive as it only returns summary statistics.

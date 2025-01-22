@@ -52,7 +52,7 @@ the Cox proportional hazards from the server side environment from the server si
 Performs survival analysis using the Cox proportional hazards models and stores the model on the server side environment.
 }
 \details{
-Serverside assign function \code{coxphSLMAassignDS} called by clientside function.
+Serverside assign function \code{coxphSLMAassignDS} called by clientside function
 \code{ds.coxphSLMAassign}.
 stores the Cox proportional hazards in the server side environment
 This request is not disclosive as it only returns a string.

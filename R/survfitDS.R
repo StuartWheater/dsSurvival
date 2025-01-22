@@ -4,7 +4,7 @@
 #'   A survival curve is based on a tabulation of the number at risk
 #'   and number of events at each unique death time.
 #' @description creates a survfit survival object in the server side environment.
-#' @details Serverside assign function \code{survfitDS} called by clientside function.
+#' @details Serverside assign function \code{survfitDS} called by clientside function
 #' \code{ds.survfit}.
 #' creates a survfit survival object in the server side environment
 #' This request is not disclosive.

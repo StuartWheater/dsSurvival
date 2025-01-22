@@ -1,7 +1,7 @@
 #' 
 #' @title Performs survival analysis using the Cox proportional hazards model at the serverside environment.
 #' @description returns a summary of the Cox proportional hazards from the server side environment.
-#' @details Serverside aggregate function \code{coxphSLMADS} called by clientside function.
+#' @details Serverside aggregate function \code{coxphSLMADS} called by clientside function
 #' \code{ds.coxphSLMA}.
 #' returns a summary of the Cox proportional hazards from the server side environment from the server side environment.
 #' This request is not disclosive as it only returns a string.
