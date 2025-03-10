@@ -47,6 +47,8 @@ Serverside aggregate function \code{cox.zphSLMADS} called by clientside function
 returns diagnostics for the test of proportional hazards assumptions
 from a Cox proportional hazards model.
 This request is not disclosive as it only returns summary statistics.
+When privacy_level is 'permissive' or 'avocado', additional diagnostic information including
+x, y and time values are returned. For other privacy levels, these values are removed.
 For further details see help for \code{ds.cox.zphSLMA} function.
 }
 \author{

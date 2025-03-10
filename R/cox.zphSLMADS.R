@@ -9,7 +9,10 @@
 #' returns diagnostics for the test of proportional hazards assumptions
 #'	from a Cox proportional hazards model.
 #' This request is not disclosive as it only returns summary statistics.
+#' When privacy_level is 'permissive' or 'avocado', additional diagnostic information including
+#' x, y and time values are returned. For other privacy levels, these values are removed.
 #' For further details see help for \code{ds.cox.zphSLMA} function.
+#' 
 #' @param fit character string specifying name of fit Cox proportional 
 #'	hazards model saved in the server-side.
 #' @param transform character string specifying how the survival times should be transformed
@@ -40,15 +43,7 @@ cox.zphSLMADS<-function(fit = NULL,
       #########################################################################
       # DataSHIELD MODULE: CAPTURE THE nfilter SETTINGS                       #
       thr <- dsBase::listDisclosureSettingsDS()                               #
-      #nfilter.tab<-as.numeric(thr$nfilter.tab)                               #
-      #nfilter.glm<-as.numeric(thr$nfilter.glm)                               #
-      #nfilter.subset<-as.numeric(thr$nfilter.subset)                         #
-      nfilter.string <- as.numeric(thr$nfilter.string)                        #
-      nfilter.tab    <- as.numeric(thr$nfilter.tab)                           #
-      nfilter.glm    <- as.numeric(thr$nfilter.glm)                           #
-      #nfilter.stringShort<-as.numeric(thr$nfilter.stringShort)               #
-      #nfilter.kNN<-as.numeric(thr$nfilter.kNN)                               #
-      #datashield.privacyLevel<-as.numeric(thr$datashield.privacyLevel)       #
+      privacy_level <- as.character(thr$datashield.privacyControlLevel)        #
       #########################################################################
             
       # check if name of fit model is set
@@ -75,8 +70,14 @@ cox.zphSLMADS<-function(fit = NULL,
       ###########################
       # disclosure checks
       ###########################
-      
-      return(coxzph_serverside)
+      if(privacy_level == 'permissive' || privacy_level == 'avocado'){
+        return(coxzph_serverside)
+      } else {
+        coxzph_serverside$x <- NULL
+        coxzph_serverside$y <- NULL
+        coxzph_serverside$time <- NULL
+        return(coxzph_serverside)
+      }
 }
 #AGGREGATE FUNCTION
 # cox.zphSLMADS
