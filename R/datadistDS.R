@@ -8,7 +8,7 @@
 #' @param adjust_to named list where names are variable names and values are either "min", "max", or "mean"
 #'        to set the "Adjust to" values for specific variables
 #' @return an rms::datadist object containing distribution summaries
-#' @author [Your Name], 2024
+#' @author Xavier Escribà Montagut, 2025
 #' @export
 datadistDS <- function(data = NULL, adjust_to = NULL) {
     
