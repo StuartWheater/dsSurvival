@@ -10,7 +10,8 @@ Depends:
 Imports:
     survival (>= 3.2-11),
     dsBase,
-    fANCOVA
+    fANCOVA,
+    rms
 Suggests:
     knitr,
     RANN,
