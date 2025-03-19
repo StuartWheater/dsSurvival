@@ -1,6 +1,6 @@
 #' @title Creates distribution summaries for rms plotting functions at the server-side environment
 #' @description Computes statistical summaries of variables for use in plotting regression model fits
-#' @details Server-side assign function {datadistDS} called by client-side function {ds.datadist}.
+#' @details Server-side assign function \code{datadistDS} called by client-side function \code{ds.datadist}.
 #' Returns a datadist object containing distribution summaries for use in rms plotting functions.
 #' This function ensures privacy by only returning summarized statistics and checking for minimum
 #' counts in categorical variables.

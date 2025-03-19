@@ -19,11 +19,11 @@ an rms::datadist object containing distribution summaries
 Computes statistical summaries of variables for use in plotting regression model fits
 }
 \details{
-Server-side assign function {datadistDS} called by client-side function {ds.datadist}.
+Server-side assign function \code{datadistDS} called by client-side function \code{ds.datadist}.
 Returns a datadist object containing distribution summaries for use in rms plotting functions.
 This function ensures privacy by only returning summarized statistics and checking for minimum
 counts in categorical variables.
 }
 \author{
-[Your Name], 2024
+Xavier Escribà Montagut, 2025
 }
