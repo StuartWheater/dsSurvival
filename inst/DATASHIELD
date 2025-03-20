@@ -9,4 +9,5 @@ AssignMethods:
     coxphSLMAassignDS,
     SurvDS,
     survfitDS,
-    datadistDS
+    datadistDS,
+    rcsDS
