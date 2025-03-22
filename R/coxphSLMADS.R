@@ -78,6 +78,7 @@ coxphSLMADS<-function(formula = NULL,
       #formula = as.formula(paste(formula,collapse="|"))
       formula <- Reduce(paste, deparse(formula))
       formula <- gsub("sssss", "survival::Surv(", formula, fixed = TRUE)
+      formula <- gsub("ggggg", "rms::rcs(", formula, fixed = TRUE)
       formula <- gsub("lll", "=", formula, fixed = TRUE)
       formula <- gsub("xxx", "|", formula, fixed = TRUE)
       formula <- gsub("yyy", "(", formula, fixed = TRUE)
