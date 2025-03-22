@@ -17,7 +17,7 @@ rcsDS <- function(x, knots = 5) {
     knots <- eval(parse(text = knots), envir = parent.frame())
   }
 
-  result <- rms::rcs(x = x, knots = knots)
+  result <- rms::rcs(x, knots)
 
   return(result)
 }
