@@ -13,6 +13,10 @@ rcsDS <- function(x, knots = 5) {
     x <- eval(parse(text = x), envir = parent.frame())
   }
 
+  if (is.character(knots)) {
+    knots <- eval(parse(text = knots), envir = parent.frame())
+  }
+
   result <- rms::rcs(x = x, knots = knots)
 
   return(result)
