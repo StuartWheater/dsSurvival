@@ -14,7 +14,8 @@ coxphSLMAassignDS(
   model = FALSE,
   x = FALSE,
   y = TRUE,
-  control = NULL
+  control = NULL,
+  use.rms = FALSE
 )
 }
 \arguments{
@@ -44,6 +45,8 @@ of such columns will be NA and the variance matrix will contain zeros.}
 
 \item{control}{object of type survival::coxph.control() specifying iteration limit and other
 control options. Default is survival::coxph.control()}
+
+\item{use.rms}{logical value. If TRUE, the rms::cph() function is used instead of survival::coxph(). Set this to TRUE if you want to use the predictDS function.}
 }
 \value{
 the Cox proportional hazards from the server side environment from the server side environment.
