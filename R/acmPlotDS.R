@@ -19,15 +19,14 @@ acmPlotDS <- function(pred_obj = NULL) {
   privacy_level <- as.character(thr$datashield.privacyControlLevel)       #
   #########################################################################
 
-  if(privacy_level != 'permissive' || privacy_level != 'avocado'){
-    stop("This function requires the server to be in permissive mode", call.=FALSE)
-  }
-
-  pred_data <- eval(parse(text=pred_obj), envir = parent.frame())
-
-  if (!inherits(pred_data, "Predict")) {
-    stop("The provided object is not of class 'Predict'", call.=FALSE)
+  if(privacy_level == 'permissive' || privacy_level == 'avocado'){
+    pred_data <- eval(parse(text=pred_obj), envir = parent.frame())
+    if (!inherits(pred_data, "Predict")) {
+      stop("The provided object is not of class 'Predict'", call.=FALSE)
+    } else {
+      return(pred_data)
+    }
   } else {
-    return(pred_data)
+    stop("This function requires the server to be in permissive mode", call.=FALSE)
   }
 }
