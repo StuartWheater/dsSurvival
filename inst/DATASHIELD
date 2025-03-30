@@ -5,10 +5,12 @@ AggregateMethods:
     summarySurvDS,
     plotsurvfitDS,
     vcovDS.coxph,
-    useDatadistDS
+    useDatadistDS,
+    acmPlotDS
 AssignMethods:
     coxphSLMAassignDS,
     SurvDS,
     survfitDS,
     datadistDS,
-    rcsDS
+    rcsDS,
+    predictDS
