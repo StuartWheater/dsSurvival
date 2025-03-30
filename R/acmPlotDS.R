@@ -13,6 +13,12 @@ acmPlotDS <- function(pred_obj = NULL) {
     stop("The specified pred_obj does not exist", call.=FALSE)
   }
 
+  #########################################################################
+  # DataSHIELD MODULE: CAPTURE THE nfilter SETTINGS                       #
+  thr <- dsBase::listDisclosureSettingsDS()                               #
+  privacy_level <- as.character(thr$datashield.privacyControlLevel)       #
+  #########################################################################
+
   if(privacy_level != 'permissive' || privacy_level != 'avocado'){
     stop("This function requires the server to be in permissive mode", call.=FALSE)
   }
