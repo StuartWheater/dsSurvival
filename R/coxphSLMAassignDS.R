@@ -23,6 +23,7 @@
 #' @param y logical value. If TRUE, the response vector is returned in component y.
 #' @param control object of type survival::coxph.control() specifying iteration limit and other
 #'        control options. Default is survival::coxph.control()
+#' @param use.rms logical value. If TRUE, the rms::cph() function is used instead of survival::coxph(). Set this to TRUE if you want to use the predictDS function.
 #' @return the Cox proportional hazards from the server side environment from the server side environment.
 #' @author Soumya Banerjee and Tom Bishop (2020).
 #' @export
@@ -35,7 +36,8 @@ coxphSLMAassignDS<-function(formula = NULL,
                             model = FALSE,
                             x = FALSE,
                             y = TRUE,
-                            control = NULL
+                            control = NULL,
+                            use.rms = FALSE
                            )
 {
       
@@ -78,6 +80,7 @@ coxphSLMAassignDS<-function(formula = NULL,
       #formula = as.formula(paste(formula,collapse="|"))
       formula <- Reduce(paste, deparse(formula))
       formula <- gsub("sssss", "survival::Surv(", formula, fixed = TRUE)
+      formula <- gsub("ggggg", "rms::rcs(", formula, fixed = TRUE)
       formula <- gsub("lll", "=", formula, fixed = TRUE)
       formula <- gsub("xxx", "|", formula, fixed = TRUE)
       formula <- gsub("yyy", "(", formula, fixed = TRUE)
@@ -159,7 +162,8 @@ coxphSLMAassignDS<-function(formula = NULL,
       # if init is NULL, then do not call coxph with init parameter
       if (!is.null(init))
       {
-              cxph_serverside <- survival::coxph(formula = formula,
+              if (use.rms) {
+                cxph_serverside <- rms::cph(formula = formula,
                                                  data = dataTable,
                                                  weights = weights,
                                                  init = init,
@@ -167,12 +171,33 @@ coxphSLMAassignDS<-function(formula = NULL,
                                                  singular.ok = singular.ok,
                                                  model = model,
                                                  x = x,
-                                                 y = y#,
-                                                 #control = eval(parse(text=as.character(control)))
+                                                 y = y
                                                 )
+              } else {
+                cxph_serverside <- survival::coxph(formula = formula,
+                                                 data = dataTable,
+                                                 weights = weights,
+                                                 ties = ties,
+                                                 singular.ok = singular.ok,
+                                                 model = model,
+                                                 x = x,
+                                                 y = y
+                                                 )
+              }
       }
       else
       {
+        if (use.rms) {
+              cxph_serverside <- rms::cph(formula = formula,
+                                                 data = dataTable,
+                                                 weights = weights,
+                                                 ties = ties,
+                                                 singular.ok = singular.ok,
+                                                 model = model,
+                                                 x = x,
+                                                 y = y
+                                                 )
+        } else {
               cxph_serverside <- survival::coxph(formula = formula,
                                                  data = dataTable,
                                                  weights = weights,
@@ -180,9 +205,9 @@ coxphSLMAassignDS<-function(formula = NULL,
                                                  singular.ok = singular.ok,
                                                  model = model,
                                                  x = x,
-                                                 y = y#,
-                                                 #control = eval(parse(text=as.character(control)))
+                                                 y = y
                                                  )
+        }
       }
       
       ###########################
@@ -191,6 +216,9 @@ coxphSLMAassignDS<-function(formula = NULL,
       # check if model oversaturated
       num_parameters  <- length(cxph_serverside$coefficients)
       num_data_points <- cxph_serverside$n
+      if (length(num_data_points) > 1) {
+            num_data_points <- num_data_points[1] + num_data_points[2]
+      }
       
       # if number of parameters greater than 0.2 * number of data points, then error
       if(num_parameters > (nfilter.glm * num_data_points) )
