@@ -24,7 +24,7 @@ acmPlotDS <- function(pred_obj = NULL) {
     if (!inherits(pred_data, "Predict")) {
       stop("The provided object is not of class 'Predict'", call.=FALSE)
     } else {
-      return(pred_data[,1,drop=FALSE])
+      return(pred_data[,1])
     }
   } else {
     stop("This function requires the server to be in permissive mode", call.=FALSE)
