@@ -53,7 +53,7 @@ predictDS <- function(fit = NULL,
       if (!(fun %in% c("exp", "log", "log2", "log10"))) {
           stop("Disclosure risk: only standard transformations are allowed", call.=FALSE)
       }
-      pred_args$fun <- fun
+      pred_args$fun <- match.fun(fun)
   }
 
   if (!is.null(type)) {
