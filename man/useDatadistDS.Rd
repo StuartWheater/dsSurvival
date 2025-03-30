@@ -16,7 +16,7 @@ TRUE if successful
 Sets a previously created datadist object as the global datadist option
 }
 \details{
-Server-side assign function {useDatadistDS} called by client-side function {ds.useDatadist}.
+Server-side assign function \code{useDatadistDS} called by client-side function \code{ds.useDatadist}.
 This function sets a datadist object created with datadistDS as the global option for rms plotting functions.
 }
 \author{
