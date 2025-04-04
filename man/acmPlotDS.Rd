@@ -2,51 +2,22 @@
 % Please edit documentation in R/acmPlotDS.R
 \name{acmPlotDS}
 \alias{acmPlotDS}
-\title{Server-side function to generate ACM plot from prediction object}
+\title{Server-side function to return prediction data for ACM plot}
 \usage{
-acmPlotDS(
-  pred_obj = NULL,
-  line_color = "blue",
-  line_size = 2,
-  ref_line_color = "brown",
-  ref_line_size = 1.5,
-  x_breaks = NULL,
-  x_label = "Primary exposure",
-  y_label = "Hazard ratio",
-  title = NULL,
-  event_n = NULL
-)
+acmPlotDS(pred_obj = NULL)
 }
 \arguments{
 \item{pred_obj}{name of the prediction object created by predictDS}
-
-\item{line_color}{color for the main line (default: "blue")}
-
-\item{line_size}{size of the main line (default: 2)}
-
-\item{ref_line_color}{color for the reference line (default: "brown")}
-
-\item{ref_line_size}{size of the reference line (default: 1.5)}
-
-\item{x_breaks}{numeric vector for x-axis breaks (optional)}
-
-\item{x_label}{label for x-axis (default: "Primary exposure")}
-
-\item{y_label}{label for y-axis (default: "Hazard ratio")}
-
-\item{title}{plot title (optional)}
-
-\item{event_n}{number of events (optional)}
 }
 \value{
-a ggplot object
+a data frame containing prediction data
 }
 \description{
-This function creates a ggplot visualization for ACM (All-Cause Mortality) analysis
+This function returns the prediction data for ACM (All-Cause Mortality) analysis
 }
 \details{
-This function is called by ds.acmPlot and implements the actual plot generation
-using ggplot2 on the server side.
+This function is called by ds.acmPlot and returns the prediction data
+from the server side.
 }
 \author{
 Xavier Escribà Montagut, 2025
