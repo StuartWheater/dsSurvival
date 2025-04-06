@@ -13,4 +13,5 @@ AssignMethods:
     survfitDS,
     datadistDS,
     rcsDS,
-    predictDS
+    predictDS,
+    finegrayDS
