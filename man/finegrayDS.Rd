@@ -42,7 +42,7 @@ The modified data frame with Fine-Gray data preparation
 This is the server-side function called by ds.finegray to create a dataset for fitting a Fine-Gray model
 }
 \details{
-Server-side assign function {finegrayDS} called by client-side function {ds.finegray}.
+Server-side assign function \code{finegrayDS} called by client-side function \code{ds.finegray}.
 This function is a wrapper for the survival::finegray function, which creates a dataset for fitting a Fine-Gray model
 in competing risks analysis. The Fine-Gray model is fit by first creating a special data set,
 and then fitting a weighted Cox model to the result.
