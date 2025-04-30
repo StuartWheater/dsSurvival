@@ -1,5 +1,5 @@
 #-------------------------------------------------------------------------------
-# Copyright (c) 2025 XXXX
+# Copyright (c) 2025 XXXX. All rights reserved.
 # Copyright (c) 2024 Arjuna Technologies, Newcastle upon Tyne. All rights reserved.
 #
 # This program and the accompanying materials
