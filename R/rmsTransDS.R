@@ -5,7 +5,7 @@
 #' Returns transformed variables for use in survival analysis from the server side environment.
 #' @param x name of the variable to be transformed. Should be a character string.
 #' @param transformation type of transformation to apply. Default is "rcs" for restricted cubic splines.
-#'        Other options include "asis", "pol", "lsp", "catg", "scored", "strat".
+#'        Other options include "asis", "pol", "lsp", "catg", "scored", "strat", "gTrans".
 #' @param parms parameters specific to the transformation type:
 #'        \itemize{
 #'          \item "rcs" - numeric vector specifying knot locations
@@ -15,6 +15,7 @@
 #'          \item "catg" - numeric vector specifying cut points for categories
 #'          \item "scored" - numeric vector specifying scores for ordinal levels
 #'          \item "strat" - numeric vector specifying cut points for stratification
+#'          \item "gTrans" - function to transform variable using custom function
 #'        }
 #' @return a transformed variable using rms::rms.trans from the server side environment.
 #' @author Xavier Escribà Montagut, 2025
@@ -69,9 +70,11 @@ rmsTransDS <- function(x = NULL,
         transformed <- rms::scored(x_param, parms)
     } else if (transformation == "strat") {
         transformed <- rms::strat(x_param, parms)
+    } else if (transformation == "gTrans") {
+        transformed <- rms::gTrans(x_param, parms)
     } else {
         stop(paste("Invalid transformation. Must be one of:", 
-                  paste(c("rcs", "asis", "pol", "lsp", "catg", "scored", "strat"),
+                  paste(c("rcs", "asis", "pol", "lsp", "catg", "scored", "strat", "gTrans"),
                         collapse=", ")), call.=FALSE)
     }
     
