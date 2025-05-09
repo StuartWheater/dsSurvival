@@ -1,4 +1,7 @@
 AggregateMethods:
+    coxphDS1,
+    coxphDS2,
+    coxphDS3,
     coxphSLMADS,
     coxphSummaryDS,
     cox.zphSLMADS,
