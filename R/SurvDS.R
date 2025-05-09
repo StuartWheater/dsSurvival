@@ -19,56 +19,10 @@
 #'	properly when they cross over from one strata to another. This parameter has rarely
 #'	proven useful.
 #' @return a survival::Surv() object from the server side environment.
-#' @author Soumya Banerjee and Tom Bishop (2021).
+#' @author Soumya Banerjee and Tom Bishop (2021), updated by Demetris Avraam (2025).
 #' @export
 #' 
 SurvDS <- function(time = NULL, time2 = NULL, event = NULL, type = NULL, origin = NULL){
-  
-  
-      #########################################################################
-      # DataSHIELD MODULE: CAPTURE THE nfilter SETTINGS                       #
-      thr <- dsBase::listDisclosureSettingsDS()                               #
-      #nfilter.tab<-as.numeric(thr$nfilter.tab)                               #
-      #nfilter.glm<-as.numeric(thr$nfilter.glm)                               #
-      #nfilter.subset<-as.numeric(thr$nfilter.subset)                         #
-      nfilter.string <- as.numeric(thr$nfilter.string)                        #
-      nfilter.tab    <- as.numeric(thr$nfilter.tab)                           #
-      nfilter.glm    <- as.numeric(thr$nfilter.glm)                           #
-      #nfilter.stringShort<-as.numeric(thr$nfilter.stringShort)               #
-      #nfilter.kNN<-as.numeric(thr$nfilter.kNN)                               #
-      #datashield.privacyLevel<-as.numeric(thr$datashield.privacyLevel)       #
-      #########################################################################
-      
-    
-      #################################
-      # check type of all parameters
-      #################################
-      # check type for time parameter
-      class_time <- dsBase::classDS(x=time)
-      if ( !('numeric' %in% class_time) & !('integer' %in% class_time) )
-      {
-            stop('Start time parameter or follow-up time parameter (time) must be numeric or integer.', call.=FALSE)
-      }
-      
-      # check type for time2 parameter
-      class_time2 <- dsBase::classDS(x=time2)
-      # if time2 is not NULL, only then check if it is numeric or integer
-      #     this is because time2 is an optional parameter
-      #     for use in interval censored data
-      if (!is.null(time2))
-      {      
-            if( !('numeric' %in% class_time2) & !('integer' %in% class_time2) )
-            {
-                  stop('Stop time parameter (time2) must be numeric or integer.', call.=FALSE)
-            }
-      }
-      
-      # check type for event parameter
-      class_event <- dsBase::classDS(x=event)
-      if ( !('numeric' %in% class_event) & !('integer' %in% class_event) & !('factor' %in% class_event) )
-      {
-            stop('Event parameter (event) must be numeric or integer or factor.', call.=FALSE)
-      }
       
       #########################################################################	
       # evaluate all these parameters in the parent frame in the call stack	
@@ -99,6 +53,37 @@ SurvDS <- function(time = NULL, time2 = NULL, event = NULL, type = NULL, origin 
       {
 	      event_param = NULL
       }	      
+      
+      #################################
+      # check class of all parameters
+      #################################
+      # check class for time parameter
+      class_time <- dsBase::classDS(x=time_param)
+      if ( !('numeric' %in% class_time) & !('integer' %in% class_time) )
+      {
+        stop('Start time parameter or follow-up time parameter (time) must be numeric or integer.', call.=FALSE)
+      }
+      
+      # check class for time2 parameter
+      # if time2 is not NULL, only then check if it is numeric or integer
+      #     this is because time2 is an optional parameter
+      #     for use in interval censored data
+      if (!is.null(time2_param))
+      {      
+        class_time2 <- dsBase::classDS(x=time2_param)
+        
+        if( !('numeric' %in% class_time2) & !('integer' %in% class_time2) )
+        {
+          stop('Stop time parameter (time2) must be numeric or integer.', call.=FALSE)
+        }
+      }
+      
+      # check type for event parameter
+      class_event <- dsBase::classDS(x=event_param)
+      if ( !('numeric' %in% class_event) & !('integer' %in% class_event) & !('factor' %in% class_event) )
+      {
+        stop('Event parameter (event) must be numeric or integer or factor.', call.=FALSE)
+      }
 	      
 	
       # evaluate this
@@ -122,20 +107,15 @@ SurvDS <- function(time = NULL, time2 = NULL, event = NULL, type = NULL, origin 
       {
 	   # if type is NULL, then do not pass it. Surv() has internal logic to derive type
 	   #	from the values of the other parameters  
-	   if (!is.null(type))
-           {
-	   	surv_object <- survival::Surv(time = time_param, event = event_param, type = type, origin = origin)
-	   }
-	   else
-	   {
-		surv_object <- survival::Surv(time = time_param, event = event_param, origin = origin)   
+	   if (!is.null(type)){
+	   	  surv_object <- survival::Surv(time = time_param, event = event_param, type = type, origin = origin)
+	   }else{
+	    	surv_object <- survival::Surv(time = time_param, event = event_param, origin = origin)   
 	   }	   
-      }	      
-	
-      
-      # surv_object <- eval(parse(text='survival::Surv(time = SURVTIME, event = EVENT)'), envir = parent.frame())
-      
-      return(surv_object)
+  }	      
+
+  return(surv_object)
+
 }
-#ASSIGN FUNCTION
+# ASSIGN FUNCTION
 # SurvDS
