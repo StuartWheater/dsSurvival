@@ -56,12 +56,9 @@ coxphSLMADS<-function(formula = NULL,
       #########################################################################
       
       # get the value of the 'data' and 'weights' parameters provided as character on the client side
-      if(is.null(dataName))
-      {
+      if(is.null(dataName)){
          dataTable <- NULL 
-      }
-      else
-      {
+      }else{
          dataTable <- eval(parse(text=dataName), envir = parent.frame())
       }
       
@@ -71,6 +68,7 @@ coxphSLMADS<-function(formula = NULL,
          stop("The formula must be set for use in survival::coxph()", call.=FALSE)
       } 	
 	
+
       ####################################################################	
       # Logic for parsing formula: since this need to be passed
       ####################################################################	
@@ -117,10 +115,10 @@ coxphSLMADS<-function(formula = NULL,
 	    control <- gsub("~ bbbb", "", control, fixed = TRUE)
 	    control <- gsub("~", "", control, fixed = TRUE)
 	    control <- gsub("bbbb", "", control, fixed = TRUE)     
-            control <- gsub("aaaaa", "survival::coxph.control(", control, fixed =  TRUE)
-   	    control <- gsub("xxx", "|", control, fixed = TRUE)
-   	    control <- gsub("yyy", "(", control, fixed = TRUE)
-   	    control <- gsub("zzz", ")", control, fixed = TRUE)
+      control <- gsub("aaaaa", "survival::coxph.control(", control, fixed =  TRUE)
+   	  control <- gsub("xxx", "|", control, fixed = TRUE)
+   	  control <- gsub("yyy", "(", control, fixed = TRUE)
+   	  control <- gsub("zzz", ")", control, fixed = TRUE)
 	    control <- gsub("ppp", "/", control, fixed = TRUE)
 	    control <- gsub("qqq", ":", control, fixed = TRUE)
 	    control <- gsub("rrr", ",", control, fixed = TRUE)
@@ -131,60 +129,60 @@ coxphSLMADS<-function(formula = NULL,
             # control <- eval(parse(text=control), envir = parent.frame())
         
       }  
-  	
-      ########################################
-      # construct call to survival::coxph()
-      ########################################
-      # if init is NULL, then do not call coxph with init parameter
-      if (!is.null(init))
-      {
-              cxph_serverside <- survival::coxph(formula = formula,
-                                                 data = dataTable,
-                                                 weights = weights,
-                                                 init = init,
-                                                 ties = ties,
-                                                 singular.ok = singular.ok,
-                                                 model = model,
-                                                 x = x,
-                                                 y = y#,
-                                                 #control = eval(parse(text=as.character(control)))
-                                                )
-      }
-      else
-      {
-              cxph_serverside <- survival::coxph(formula = formula,
-                                                 data = dataTable,
-                                                 weights = weights,
-                                                 ties = ties,
-                                                 singular.ok = singular.ok,
-                                                 model = model,
-                                                 x = x,
-                                                 y = y#,
-                                                 #control = eval(parse(text=as.character(control)))
-                                                 )
-      }
+  # 	
+  #     ########################################
+  #     # construct call to survival::coxph()
+  #     ########################################
+  #     # if init is NULL, then do not call coxph with init parameter
+  #     if (!is.null(init))
+  #     {
+  #             cxph_serverside <- survival::coxph(formula = formula,
+  #                                                data = dataTable,
+  #                                                weights = weights,
+  #                                                init = init,
+  #                                                ties = ties,
+  #                                                singular.ok = singular.ok,
+  #                                                model = model,
+  #                                                x = x,
+  #                                                y = y#,
+  #                                                #control = eval(parse(text=as.character(control)))
+  #                                               )
+  #     }
+  #     else
+  #     {
+  #             cxph_serverside <- survival::coxph(formula = formula,
+  #                                                data = dataTable,
+  #                                                weights = weights,
+  #                                                ties = ties,
+  #                                                singular.ok = singular.ok,
+  #                                                model = model,
+  #                                                x = x,
+  #                                                y = y#,
+  #                                                #control = eval(parse(text=as.character(control)))
+  #                                                )
+  #     }
       
-      ###########################
-      # disclosure checks
-      ###########################
-      # check if model oversaturated
-      num_parameters  <- length(cxph_serverside$coefficients)
-      num_data_points <- cxph_serverside$n
+      # ###########################
+      # # disclosure checks
+      # ###########################
+      # # check if model oversaturated
+      # num_parameters  <- length(cxph_serverside$coefficients)
+      # num_data_points <- cxph_serverside$n
+      # 
+      # # if number of parameters greater than for example 0.2 * number of data points, then error
+      # #    the fraction (for example, 0.2) can be set by the administrator	
+      # if(num_parameters > (nfilter.glm * num_data_points) )
+      # {
+      #       # glm.saturation.invalid<-1
+      #       # errorMessage.gos<-paste0("ERROR: Model is oversaturated (too many model parameters relative to sample size)",
+      #       #                 "leading to a possible risk of disclosure - please simplify model. With ",
+      #       #                 num.p," parameters and nfilter.glm = ",round(nfilter.glm,4)," you need ",
+      #       #                 round((num.p/nfilter.glm),0)," observations")
+      #       return("ERROR: Model is oversaturated (too many model parameters or covariates relative to sample size)")
+      # }
+      # 
       
-      # if number of parameters greater than for example 0.2 * number of data points, then error
-      #    the fraction (for example, 0.2) can be set by the administrator	
-      if(num_parameters > (nfilter.glm * num_data_points) )
-      {
-            # glm.saturation.invalid<-1
-            # errorMessage.gos<-paste0("ERROR: Model is oversaturated (too many model parameters relative to sample size)",
-            #                 "leading to a possible risk of disclosure - please simplify model. With ",
-            #                 num.p," parameters and nfilter.glm = ",round(nfilter.glm,4)," you need ",
-            #                 round((num.p/nfilter.glm),0)," observations")
-            return("ERROR: Model is oversaturated (too many model parameters or covariates relative to sample size)")
-      }
-      
-      
-      return(summary(cxph_serverside))
+#      return(summary(cxph_serverside))
 }
 #AGGREGATE FUNCTION
 # coxphSLMADS
