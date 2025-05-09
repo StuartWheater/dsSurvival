@@ -62,6 +62,12 @@ coxphSLMADS<-function(formula = NULL,
          dataTable <- eval(parse(text=dataName), envir = parent.frame())
       }
       
+      if(is.null(weights)){
+        weights <- NULL 
+      }else{
+        weights <- eval(parse(text=weights), envir = parent.frame())
+      }
+      
       # check if formula is set
       if (is.null(formula))
       {
@@ -74,27 +80,19 @@ coxphSLMADS<-function(formula = NULL,
       ####################################################################	
       # Put pipes back into formula
       #formula = as.formula(paste(formula,collapse="|"))
-      
-      formulatext <- Reduce(paste, deparse(formula))
-      originalFormula <- formulatext
-      
-      #formula <- Reduce(paste, deparse(formula))
-      formulatext <- gsub("sssss", "survival::Surv(", formulatext, fixed = TRUE)
-      formulatext <- gsub("lll", "=", formulatext, fixed = TRUE)
-      formulatext <- gsub("xxx", "|", formulatext, fixed = TRUE)
-      formulatext <- gsub("yyy", "(", formulatext, fixed = TRUE)
-      formulatext <- gsub("zzz", ")", formulatext, fixed = TRUE)
-      formulatext <- gsub("ppp", "/", formulatext, fixed = TRUE)
-      formulatext <- gsub("qqq", ":", formulatext, fixed = TRUE)
-      formulatext <- gsub("rrr", ",", formulatext, fixed = TRUE)
-      
-      originalFormulaFormula <- stats::as.formula(originalFormula)
-      formula2use <- stats::as.formula(paste0(Reduce(paste, deparse(originalFormulaFormula))), env = parent.frame()) # here we need the formula as a 'call' object
-      
+      formula <- Reduce(paste, deparse(formula))
+      formula <- gsub("sssss", "survival::Surv(", formula, fixed = TRUE)
+      formula <- gsub("lll", "=", formula, fixed = TRUE)
+      formula <- gsub("xxx", "|", formula, fixed = TRUE)
+      formula <- gsub("yyy", "(", formula, fixed = TRUE)
+      formula <- gsub("zzz", ")", formula, fixed = TRUE)
+      formula <- gsub("ppp", "/", formula, fixed = TRUE)
+      formula <- gsub("qqq", ":", formula, fixed = TRUE)
+      formula <- gsub("rrr", ",", formula, fixed = TRUE)
 
       # convert back to formula
-     # formula <- stats::as.formula(formula)
-    #  formula <- stats::as.formula(paste0(Reduce(paste, deparse(formula))), env = parent.frame())
+      formula <- stats::as.formula(formula)
+      formula <- stats::as.formula(paste0(Reduce(paste, deparse(formula))), env = parent.frame())
       
       ########################################
       # reconstruct control object
@@ -144,7 +142,7 @@ coxphSLMADS<-function(formula = NULL,
       # if init is NULL, then do not call coxph with init parameter
       if (!is.null(init))
       {
-              cxph_serverside <- survival::coxph(formula = formula2use,
+              cxph_serverside <- survival::coxph(formula = formula,
                                                  data = dataTable,
                                                  weights = weights,
                                                  init = init,
@@ -158,7 +156,7 @@ coxphSLMADS<-function(formula = NULL,
       }
       else
       {
-              cxph_serverside <- survival::coxph(formula = formula2use,
+              cxph_serverside <- survival::coxph(formula = formula,
                                                  data = dataTable,
                                                  weights = weights,
                                                  ties = ties,
@@ -169,7 +167,7 @@ coxphSLMADS<-function(formula = NULL,
                                                  #control = eval(parse(text=as.character(control)))
                                                  )
       }
-
+      
       # ###########################
       # # disclosure checks
       # ###########################
