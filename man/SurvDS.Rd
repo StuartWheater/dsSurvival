@@ -38,5 +38,5 @@ This request is not disclosive as it only returns a string.
 For further details see help for \code{ds.Surv} function.
 }
 \author{
-Soumya Banerjee and Tom Bishop (2021).
+Soumya Banerjee and Tom Bishop (2021), updated by Demetris Avraam (2025).
 }

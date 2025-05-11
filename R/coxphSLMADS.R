@@ -89,6 +89,7 @@ coxphSLMADS<-function(formula = NULL,
 
       # convert back to formula
       formula <- stats::as.formula(formula)
+      formula <- stats::as.formula(paste0(Reduce(paste, deparse(formula))), env = parent.frame())
       
       ########################################
       # reconstruct control object
