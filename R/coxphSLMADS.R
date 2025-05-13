@@ -56,9 +56,9 @@ coxphSLMADS <- function(formula = NULL, dataName = NULL, weights = NULL,
       }
       
       if(is.null(weights)){
-        weights <- NULL 
+        weights_obj <- NULL 
       }else{
-      #  weights <- eval(parse(text=weights), envir = parent.frame())
+        weights_obj <- eval(parse(text=weights), envir = parent.frame())
       }
       
       # check if formula is set
@@ -129,39 +129,37 @@ coxphSLMADS <- function(formula = NULL, dataName = NULL, weights = NULL,
         
       }  
       
-      return(list=c(formula,data,weights,init, control))
-
-      # ########################################
-      # # construct call to survival::coxph()
-      # ########################################
-      # # if init is NULL, then do not call coxph with init parameter
-      # if (!is.null(init))
-      # {
-      #         cxph_serverside <- survival::coxph(formula = formula,
-      #                                            data = dataTable,
-      #                                            weights = weights,
-      #                                            init = init,
-      #                                            ties = ties,
-      #                                            singular.ok = singular.ok,
-      #                                            model = model,
-      #                                            x = x,
-      #                                            y = y#,
-      #                                            #control = eval(parse(text=as.character(control)))
-      #                                           )
-      # }
-      # else
-      # {
-      #         cxph_serverside <- survival::coxph(formula = formula,
-      #                                            data = dataTable,
-      #                                            weights = weights,
-      #                                            ties = ties,
-      #                                            singular.ok = singular.ok,
-      #                                            model = model,
-      #                                            x = x,
-      #                                            y = y#,
-      #                                            #control = eval(parse(text=as.character(control)))
-      #                                            )
-      # }
+      ########################################
+      # construct call to survival::coxph()
+      ########################################
+      # if init is NULL, then do not call coxph with init parameter
+      if (!is.null(init))
+      {
+              cxph_serverside <- survival::coxph(formula = formula,
+                                                 data = dataTable,
+                                                 weights = weights_obj,
+                                                 init = init,
+                                                 ties = ties,
+                                                 singular.ok = singular.ok,
+                                                 model = model,
+                                                 x = x,
+                                                 y = y#,
+                                                 #control = eval(parse(text=as.character(control)))
+                                                )
+      }
+      else
+      {
+              cxph_serverside <- survival::coxph(formula = formula,
+                                                 data = dataTable,
+                                                 weights = weights_obj,
+                                                 ties = ties,
+                                                 singular.ok = singular.ok,
+                                                 model = model,
+                                                 x = x,
+                                                 y = y#,
+                                                 #control = eval(parse(text=as.character(control)))
+                                                 )
+      }
       
       # ###########################
       # # disclosure checks
