@@ -19,7 +19,7 @@
 #'	properly when they cross over from one strata to another. This parameter has rarely
 #'	proven useful.
 #' @return a survival::Surv() object from the server side environment.
-#' @author Soumya Banerjee and Tom Bishop (2021), updated by Demetris Avraam (2025).
+#' @author Soumya Banerjee and Tom Bishop (2021), updated by Demetris Avraam (May, 2025).
 #' @export
 #' 
 SurvDS <- function(time = NULL, time2 = NULL, event = NULL, type = NULL, origin = NULL){

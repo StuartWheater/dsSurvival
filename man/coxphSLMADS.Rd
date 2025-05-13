@@ -59,5 +59,5 @@ This request is not disclosive as it only returns a string.
 For further details see help for \code{ds.coxphSLMA} function.
 }
 \author{
-Soumya Banerjee and Tom Bishop (2020).
+Soumya Banerjee and Tom Bishop (2020), updated by Demetris Avraam (May, 2025).
 }
