@@ -61,44 +61,41 @@ coxphSLMADS <- function(formula = NULL, dataName = NULL, weights = NULL,
         weights_obj <- eval(parse(text=weights), envir = parent.frame())
       }
       
-      
-      return(weights_obj)}
-      
-#       # check if formula is set
-#       if (is.null(formula))
-#       {
-#          stop("The formula must be set for use in survival::coxph()", call.=FALSE)
-#       } 	
-# 	
-# 
-#       ####################################################################	
-#       # Logic for parsing formula: since this need to be passed
-#       ####################################################################	
-#       # Put pipes back into formula
-#       #formula = as.formula(paste(formula,collapse="|"))
-#       formula <- Reduce(paste, deparse(formula))
-#       formula <- gsub("sssss", "survival::Surv(", formula, fixed = TRUE)
-#       formula <- gsub("lll", "=", formula, fixed = TRUE)
-#       formula <- gsub("xxx", "|", formula, fixed = TRUE)
-#       formula <- gsub("yyy", "(", formula, fixed = TRUE)
-#       formula <- gsub("zzz", ")", formula, fixed = TRUE)
-#       formula <- gsub("ppp", "/", formula, fixed = TRUE)
-#       formula <- gsub("qqq", ":", formula, fixed = TRUE)
-#       formula <- gsub("rrr", ",", formula, fixed = TRUE)
-# 
-#       # convert back to formula
-#       formula <- stats::as.formula(formula)
-#       formula <- stats::as.formula(paste0(Reduce(paste, deparse(formula))), env = parent.frame())
-#       
-#       ########################################
-#       # reconstruct control object
-#       ########################################
-#       if (is.null(control))
-#       {
-#             # if the value is null, then substitute default values which is 
-#             #   survival::coxph.control()
-#             control <- survival::coxph.control()
-#       }
+      # check if formula is set
+      if (is.null(formula))
+      {
+         stop("The formula must be set for use in survival::coxph()", call.=FALSE)
+      }
+
+
+      ####################################################################
+      # Logic for parsing formula: since this need to be passed
+      ####################################################################
+      # Put pipes back into formula
+      #formula = as.formula(paste(formula,collapse="|"))
+      formula <- Reduce(paste, deparse(formula))
+      formula <- gsub("sssss", "survival::Surv(", formula, fixed = TRUE)
+      formula <- gsub("lll", "=", formula, fixed = TRUE)
+      formula <- gsub("xxx", "|", formula, fixed = TRUE)
+      formula <- gsub("yyy", "(", formula, fixed = TRUE)
+      formula <- gsub("zzz", ")", formula, fixed = TRUE)
+      formula <- gsub("ppp", "/", formula, fixed = TRUE)
+      formula <- gsub("qqq", ":", formula, fixed = TRUE)
+      formula <- gsub("rrr", ",", formula, fixed = TRUE)
+
+      # convert back to formula
+      formula <- stats::as.formula(formula)
+      formula <- stats::as.formula(paste0(Reduce(paste, deparse(formula))), env = parent.frame())
+
+      ########################################
+      # reconstruct control object
+      ########################################
+      if (is.null(control))
+      {
+            # if the value is null, then substitute default values which is
+            #   survival::coxph.control()
+            control <- survival::coxph.control()
+      }
 #       else
 #       {
 #             # reconstruct after passing this through parser
@@ -185,6 +182,6 @@ coxphSLMADS <- function(formula = NULL, dataName = NULL, weights = NULL,
 #       # 
 #       
 # #      return(summary(cxph_serverside))
-# }
+}
 #AGGREGATE FUNCTION
 # coxphSLMADS
