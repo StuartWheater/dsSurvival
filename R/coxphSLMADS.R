@@ -24,7 +24,7 @@
 #' @param control object of type survival::coxph.control() specifying iteration limit and other
 #'        control options. Default is survival::coxph.control()
 #' @return a summary of the Cox proportional hazards from the server side environment from the server side environment.
-#' @author Soumya Banerjee and Tom Bishop (2020).
+#' @author Soumya Banerjee and Tom Bishop (2020), updated by Demetris Avraam (May, 2025).
 #' @export
 #' 
 coxphSLMADS <- function(formula = NULL, dataName = NULL, weights = NULL,
@@ -32,34 +32,22 @@ coxphSLMADS <- function(formula = NULL, dataName = NULL, weights = NULL,
                       model = FALSE, x = FALSE, y = TRUE,
                       control = NULL){
       
-      errorMessage <- "No errors"
+  # DataSHIELD MODULE: CAPTURE THE nfilter SETTINGS
+  thr <- dsBase::listDisclosureSettingsDS()
+  nfilter.glm    <- as.numeric(thr$nfilter.glm)
       
-      #########################################################################
-      # DataSHIELD MODULE: CAPTURE THE nfilter SETTINGS                       #
-      thr <- dsBase::listDisclosureSettingsDS()                               #
-      #nfilter.tab<-as.numeric(thr$nfilter.tab)                               #
-      #nfilter.glm<-as.numeric(thr$nfilter.glm)                               #
-      #nfilter.subset<-as.numeric(thr$nfilter.subset)                         #
-      nfilter.string <- as.numeric(thr$nfilter.string)                        #
-      nfilter.tab    <- as.numeric(thr$nfilter.tab)                           #
-      nfilter.glm    <- as.numeric(thr$nfilter.glm)                           #
-      #nfilter.stringShort<-as.numeric(thr$nfilter.stringShort)               #
-      #nfilter.kNN<-as.numeric(thr$nfilter.kNN)                               #
-      #datashield.privacyLevel<-as.numeric(thr$datashield.privacyLevel)       #
-      #########################################################################
+  # get the value of the 'data' and 'weights' parameters provided as character on the client side
+  if(is.null(dataName)){
+    dataTable <- NULL 
+  }else{
+    dataTable <- eval(parse(text=dataName), envir = parent.frame())
+  }
       
-      # get the value of the 'data' and 'weights' parameters provided as character on the client side
-      if(is.null(dataName)){
-         dataTable <- NULL 
-      }else{
-         dataTable <- eval(parse(text=dataName), envir = parent.frame())
-      }
-      
-      if(is.null(weights)){
-        weights_obj <- NULL 
-      }else{
-        weights_obj <- eval(parse(text=weights), envir = parent.frame())
-      }
+  if(is.null(weights)){
+    weights_obj <- NULL 
+  }else{
+    weights_obj <- eval(parse(text=weights), envir = parent.frame())
+  }
       
       # check if formula is set
       if (is.null(formula))
@@ -170,17 +158,11 @@ coxphSLMADS <- function(formula = NULL, dataName = NULL, weights = NULL,
 
       # if number of parameters greater than for example 0.2 * number of data points, then error
       #    the fraction (for example, 0.2) can be set by the administrator
-      if(num_parameters > (nfilter.glm * num_data_points) )
-      {
-            # glm.saturation.invalid<-1
-            # errorMessage.gos<-paste0("ERROR: Model is oversaturated (too many model parameters relative to sample size)",
-            #                 "leading to a possible risk of disclosure - please simplify model. With ",
-            #                 num.p," parameters and nfilter.glm = ",round(nfilter.glm,4)," you need ",
-            #                 round((num.p/nfilter.glm),0)," observations")
-            return("ERROR: Model is oversaturated (too many model parameters or covariates relative to sample size)")
-      }
+    if(num_parameters > (nfilter.glm * num_data_points) ){
+        return("ERROR: Model is oversaturated (too many model parameters or covariates relative to sample size)")
+    }
 
     return(summary(cxph_serverside))
 }
-#AGGREGATE FUNCTION
+# AGGREGATE FUNCTION
 # coxphSLMADS
