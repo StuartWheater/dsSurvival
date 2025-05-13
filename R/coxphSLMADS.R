@@ -147,19 +147,19 @@ coxphSLMADS <- function(formula = NULL, dataName = NULL, weights = NULL,
                                                  #control = eval(parse(text=as.character(control)))
                                                 )
       }
-#       else
-#       {
-#               cxph_serverside <- survival::coxph(formula = formula,
-#                                                  data = dataTable,
-#                                                  weights = weights_obj,
-#                                                  ties = ties,
-#                                                  singular.ok = singular.ok,
-#                                                  model = model,
-#                                                  x = x,
-#                                                  y = y#,
-#                                                  #control = eval(parse(text=as.character(control)))
-#                                                  )
-#       }
+      else
+      {
+              cxph_serverside <- survival::coxph(formula = formula,
+                                                 data = dataTable,
+                                                 weights = weights_obj,
+                                                 ties = ties,
+                                                 singular.ok = singular.ok,
+                                                 model = model,
+                                                 x = x,
+                                                 y = y#,
+                                                 #control = eval(parse(text=as.character(control)))
+                                                 )
+      }
 #       
 #       # ###########################
 #       # # disclosure checks
