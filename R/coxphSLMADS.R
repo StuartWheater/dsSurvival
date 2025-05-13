@@ -26,18 +26,11 @@
 #' @return a summary of the Cox proportional hazards from the server side environment from the server side environment.
 #' @author Soumya Banerjee and Tom Bishop (2020).
 #' @export
-coxphSLMADS<-function(formula = NULL,
-                      dataName = NULL,
-                      weights = NULL,
-                      init = NULL,
-                      ties = 'efron',
-                      singular.ok = TRUE,
-                      model = FALSE,
-                      x = FALSE,
-                      y = TRUE,
-                      control = NULL
-                     )
-{
+#' 
+coxphSLMADS <- function(formula = NULL, dataName = NULL, weights = NULL,
+                      init = NULL, ties = 'efron', singular.ok = TRUE,
+                      model = FALSE, x = FALSE, y = TRUE,
+                      control = NULL){
       
       errorMessage <- "No errors"
       
@@ -65,7 +58,7 @@ coxphSLMADS<-function(formula = NULL,
       if(is.null(weights)){
         weights <- NULL 
       }else{
-        weights <- eval(parse(text=weights), envir = parent.frame())
+      #  weights <- eval(parse(text=weights), envir = parent.frame())
       }
       
       # check if formula is set
