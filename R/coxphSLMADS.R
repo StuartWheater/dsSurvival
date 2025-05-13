@@ -160,28 +160,27 @@ coxphSLMADS <- function(formula = NULL, dataName = NULL, weights = NULL,
                                                  #control = eval(parse(text=as.character(control)))
                                                  )
       }
-#       
-#       # ###########################
-#       # # disclosure checks
-#       # ###########################
-#       # # check if model oversaturated
-#       # num_parameters  <- length(cxph_serverside$coefficients)
-#       # num_data_points <- cxph_serverside$n
-#       # 
-#       # # if number of parameters greater than for example 0.2 * number of data points, then error
-#       # #    the fraction (for example, 0.2) can be set by the administrator	
-#       # if(num_parameters > (nfilter.glm * num_data_points) )
-#       # {
-#       #       # glm.saturation.invalid<-1
-#       #       # errorMessage.gos<-paste0("ERROR: Model is oversaturated (too many model parameters relative to sample size)",
-#       #       #                 "leading to a possible risk of disclosure - please simplify model. With ",
-#       #       #                 num.p," parameters and nfilter.glm = ",round(nfilter.glm,4)," you need ",
-#       #       #                 round((num.p/nfilter.glm),0)," observations")
-#       #       return("ERROR: Model is oversaturated (too many model parameters or covariates relative to sample size)")
-#       # }
-#       # 
-#       
-# #      return(summary(cxph_serverside))
+
+      ###########################
+      # disclosure checks
+      ###########################
+      # check if model oversaturated
+      num_parameters  <- length(cxph_serverside$coefficients)
+      num_data_points <- cxph_serverside$n
+
+      # if number of parameters greater than for example 0.2 * number of data points, then error
+      #    the fraction (for example, 0.2) can be set by the administrator
+      if(num_parameters > (nfilter.glm * num_data_points) )
+      {
+            # glm.saturation.invalid<-1
+            # errorMessage.gos<-paste0("ERROR: Model is oversaturated (too many model parameters relative to sample size)",
+            #                 "leading to a possible risk of disclosure - please simplify model. With ",
+            #                 num.p," parameters and nfilter.glm = ",round(nfilter.glm,4)," you need ",
+            #                 round((num.p/nfilter.glm),0)," observations")
+            return("ERROR: Model is oversaturated (too many model parameters or covariates relative to sample size)")
+      }
+
+    return(summary(cxph_serverside))
 }
 #AGGREGATE FUNCTION
 # coxphSLMADS
