@@ -10,7 +10,7 @@ rmsTransDS(x = NULL, transformation = "rcs", parms = NULL)
 \item{x}{name of the variable to be transformed. Should be a character string.}
 
 \item{transformation}{type of transformation to apply. Default is "rcs" for restricted cubic splines.
-Other options include "asis", "pol", "lsp", "catg", "scored", "strat".}
+Other options include "asis", "pol", "lsp", "catg", "scored", "strat", "gTrans".}
 
 \item{parms}{parameters specific to the transformation type:
 \itemize{
@@ -21,6 +21,7 @@ Other options include "asis", "pol", "lsp", "catg", "scored", "strat".}
   \item "catg" - numeric vector specifying cut points for categories
   \item "scored" - numeric vector specifying scores for ordinal levels
   \item "strat" - numeric vector specifying cut points for stratification
+  \item "gTrans" - function to transform variable using custom function
 }}
 }
 \value{
