@@ -17,4 +17,5 @@ AssignMethods:
     datadistDS,
     rcsDS,
     predictDS,
-    finegrayDS
+    finegrayDS,
+    rmsTransDS
