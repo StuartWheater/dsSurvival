@@ -1,6 +1,6 @@
 #' @title Creates restricted cubic splines and other transformations using rms package at the serverside environment
 #' @description Returns a transformed variable using rms::rms.trans from the server side environment.
-#' @details Serverside assign function {rmsTransDS} for creating restricted cubic splines and other transformations.
+#' @details Serverside assign function \code{rmsTransDS} for creating restricted cubic splines and other transformations.
 #' This function primarily focuses on restricted cubic splines (rcs) by default but supports other transformations.
 #' Returns transformed variables for use in survival analysis from the server side environment.
 #' @param x name of the variable to be transformed. Should be a character string.
