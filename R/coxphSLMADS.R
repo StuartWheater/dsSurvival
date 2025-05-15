@@ -24,56 +24,41 @@
 #' @param control object of type survival::coxph.control() specifying iteration limit and other
 #'        control options. Default is survival::coxph.control()
 #' @return a summary of the Cox proportional hazards from the server side environment from the server side environment.
-#' @author Soumya Banerjee and Tom Bishop (2020).
+#' @author Soumya Banerjee and Tom Bishop (2020), updated by Demetris Avraam (May, 2025).
 #' @export
-coxphSLMADS<-function(formula = NULL,
-                      dataName = NULL,
-                      weights = NULL,
-                      init = NULL,
-                      ties = 'efron',
-                      singular.ok = TRUE,
-                      model = FALSE,
-                      x = FALSE,
-                      y = TRUE,
-                      control = NULL
-                     )
-{
+#' 
+coxphSLMADS <- function(formula = NULL, dataName = NULL, weights = NULL,
+                      init = NULL, ties = 'efron', singular.ok = TRUE,
+                      model = FALSE, x = FALSE, y = TRUE,
+                      control = NULL){
       
-      errorMessage <- "No errors"
+  # DataSHIELD MODULE: CAPTURE THE nfilter SETTINGS
+  thr <- dsBase::listDisclosureSettingsDS()
+  nfilter.glm    <- as.numeric(thr$nfilter.glm)
       
-      #########################################################################
-      # DataSHIELD MODULE: CAPTURE THE nfilter SETTINGS                       #
-      thr <- dsBase::listDisclosureSettingsDS()                               #
-      #nfilter.tab<-as.numeric(thr$nfilter.tab)                               #
-      #nfilter.glm<-as.numeric(thr$nfilter.glm)                               #
-      #nfilter.subset<-as.numeric(thr$nfilter.subset)                         #
-      nfilter.string <- as.numeric(thr$nfilter.string)                        #
-      nfilter.tab    <- as.numeric(thr$nfilter.tab)                           #
-      nfilter.glm    <- as.numeric(thr$nfilter.glm)                           #
-      #nfilter.stringShort<-as.numeric(thr$nfilter.stringShort)               #
-      #nfilter.kNN<-as.numeric(thr$nfilter.kNN)                               #
-      #datashield.privacyLevel<-as.numeric(thr$datashield.privacyLevel)       #
-      #########################################################################
+  # get the value of the 'data' and 'weights' parameters provided as character on the client side
+  if(is.null(dataName)){
+    dataTable <- NULL 
+  }else{
+    dataTable <- eval(parse(text=dataName), envir = parent.frame())
+  }
       
-      # get the value of the 'data' and 'weights' parameters provided as character on the client side
-      if(is.null(dataName))
-      {
-         dataTable <- NULL 
-      }
-      else
-      {
-         dataTable <- eval(parse(text=dataName), envir = parent.frame())
-      }
+  if(is.null(weights)){
+    weights_obj <- NULL 
+  }else{
+    weights_obj <- eval(parse(text=weights), envir = parent.frame())
+  }
       
       # check if formula is set
       if (is.null(formula))
       {
          stop("The formula must be set for use in survival::coxph()", call.=FALSE)
-      } 	
-	
-      ####################################################################	
+      }
+
+
+      ####################################################################
       # Logic for parsing formula: since this need to be passed
-      ####################################################################	
+      ####################################################################
       # Put pipes back into formula
       #formula = as.formula(paste(formula,collapse="|"))
       formula <- Reduce(paste, deparse(formula))
@@ -98,49 +83,49 @@ coxphSLMADS<-function(formula = NULL,
       # convert back to formula
       formula <- stats::as.formula(formula)
       formula <- stats::as.formula(paste0(Reduce(paste, deparse(formula))), env = parent.frame())
-      
+
       ########################################
       # reconstruct control object
       ########################################
       if (is.null(control))
       {
-            # if the value is null, then substitute default values which is 
+            # if the value is null, then substitute default values which is
             #   survival::coxph.control()
             control <- survival::coxph.control()
       }
       else
       {
             # reconstruct after passing this through parser
-            ####################################################################	
+            ####################################################################
             # Logic for parsing formula: since this need to be passed
-            ####################################################################	
-           
+            ####################################################################
+
             # Put pipes back into formula
             #formula = as.formula(paste(formula,collapse="|"))
-	    
+
             control <- Reduce(paste, deparse(control))
 	    # remove the extra ~ bbbb passed here
 	    #	this ~ bbbb needs to be passed because
 	    #   everything needs to be passed as formula
-	    #	and an expression of the form a ~ b is required	  
+	    #	and an expression of the form a ~ b is required
 	    control <- gsub("~ bbbb", "", control, fixed = TRUE)
 	    control <- gsub("~", "", control, fixed = TRUE)
-	    control <- gsub("bbbb", "", control, fixed = TRUE)     
-            control <- gsub("aaaaa", "survival::coxph.control(", control, fixed =  TRUE)
-   	    control <- gsub("xxx", "|", control, fixed = TRUE)
-   	    control <- gsub("yyy", "(", control, fixed = TRUE)
-   	    control <- gsub("zzz", ")", control, fixed = TRUE)
+	    control <- gsub("bbbb", "", control, fixed = TRUE)
+      control <- gsub("aaaaa", "survival::coxph.control(", control, fixed =  TRUE)
+   	  control <- gsub("xxx", "|", control, fixed = TRUE)
+   	  control <- gsub("yyy", "(", control, fixed = TRUE)
+   	  control <- gsub("zzz", ")", control, fixed = TRUE)
 	    control <- gsub("ppp", "/", control, fixed = TRUE)
 	    control <- gsub("qqq", ":", control, fixed = TRUE)
 	    control <- gsub("rrr", ",", control, fixed = TRUE)
 	    #control <- gsub("", " ",    control, fixed = TRUE)
 	    control <- gsub("lll", "=", control, fixed = TRUE)
-            
+
             # use eval to construct an object of type survival::coxph.control()
             # control <- eval(parse(text=control), envir = parent.frame())
-        
-      }  
-  	
+
+      }
+
       ########################################
       # construct call to survival::coxph()
       ########################################
@@ -149,7 +134,7 @@ coxphSLMADS<-function(formula = NULL,
       {
               cxph_serverside <- survival::coxph(formula = formula,
                                                  data = dataTable,
-                                                 weights = weights,
+                                                 weights = weights_obj,
                                                  init = init,
                                                  ties = ties,
                                                  singular.ok = singular.ok,
@@ -163,7 +148,7 @@ coxphSLMADS<-function(formula = NULL,
       {
               cxph_serverside <- survival::coxph(formula = formula,
                                                  data = dataTable,
-                                                 weights = weights,
+                                                 weights = weights_obj,
                                                  ties = ties,
                                                  singular.ok = singular.ok,
                                                  model = model,
@@ -172,28 +157,21 @@ coxphSLMADS<-function(formula = NULL,
                                                  #control = eval(parse(text=as.character(control)))
                                                  )
       }
-      
+
       ###########################
       # disclosure checks
       ###########################
       # check if model oversaturated
       num_parameters  <- length(cxph_serverside$coefficients)
       num_data_points <- cxph_serverside$n
-      
+
       # if number of parameters greater than for example 0.2 * number of data points, then error
-      #    the fraction (for example, 0.2) can be set by the administrator	
-      if(num_parameters > (nfilter.glm * num_data_points) )
-      {
-            # glm.saturation.invalid<-1
-            # errorMessage.gos<-paste0("ERROR: Model is oversaturated (too many model parameters relative to sample size)",
-            #                 "leading to a possible risk of disclosure - please simplify model. With ",
-            #                 num.p," parameters and nfilter.glm = ",round(nfilter.glm,4)," you need ",
-            #                 round((num.p/nfilter.glm),0)," observations")
-            return("ERROR: Model is oversaturated (too many model parameters or covariates relative to sample size)")
-      }
-      
-      
-      return(summary(cxph_serverside))
+      #    the fraction (for example, 0.2) can be set by the administrator
+    if(num_parameters > (nfilter.glm * num_data_points) ){
+        return("ERROR: Model is oversaturated (too many model parameters or covariates relative to sample size)")
+    }
+
+    return(summary(cxph_serverside))
 }
-#AGGREGATE FUNCTION
+# AGGREGATE FUNCTION
 # coxphSLMADS
