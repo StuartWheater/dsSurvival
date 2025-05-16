@@ -22,23 +22,44 @@ set.standard.disclosure.settings()
 #
 
 context("finegrayDS::arg::no parameters")
-test_that("no parameters finegrayDS", {
+test_that("no parameters", {
     expect_error(finegrayDS(), "Both 'formula' and 'data' parameters must be provided", fixed = TRUE)
 })
 
-context("finegrayDS::arg::null parameters")
-test_that("null parameters finegrayDS", {
-    expect_error(finegrayDS(NULL), "Both 'formula' and 'data' parameters must be provided", fixed = TRUE)
+context("finegrayDS::arg::null 'formula' and 'data' parameters")
+test_that("null 'formula' and 'data' parameters", {
+    formula <- NULL
+    data    <- NULL
+
+    expect_error(finegrayDS(formula = formula, data = data), "Both 'formula' and 'data' parameters must be provided", fixed = TRUE)
 })
 
-context("finegrayDS::arg formula is null, data no value")
-test_that("formula is null, data no value", {
-    expect_error(finegrayDS(formula = "a ~ b"), "Both 'formula' and 'data' parameters must be provided", fixed = TRUE)
+context("finegrayDS::arg::null 'formula' parameter")
+test_that("null 'formula' parameter", {
+    formula     <- NULL
+    data        <- "data_val"
+    data_val    <- "value"
+
+    expect_error(finegrayDS(formula = formula, data = data), "Both 'formula' and 'data' parameters must be provided", fixed = TRUE)
 })
 
-context("finegrayDS::arg formula no value, data is null")
-test_that("formula no value, data is null", {
-    expect_error(finegrayDS(data = NULL), "Both 'formula' and 'data' parameters must be provided", fixed = TRUE)
+context("finegrayDS::arg::null 'data' parameters")
+test_that("null 'data' parameters", {
+    formula     <- "formula_val"
+    formula_val <- "value"
+    data        <- NULL
+
+    expect_error(finegrayDS(formula = formula, data = data), "Both 'formula' and 'data' parameters must be provided", fixed = TRUE)
+})
+
+context("finegrayDS::arg::valid times parameters")
+test_that("valid times parameters finegrayDS", {
+    formula     <- "formula_val"
+    formula_val <- "x ~ a"
+    data        <- "data_val"
+    data_val    <- "value"
+
+    expect_error(finegrayDS(formula = formula, data = data), "invalid formula \"\\\"formula_val\\\"\": not a call", fixed = TRUE)
 })
 
 #
