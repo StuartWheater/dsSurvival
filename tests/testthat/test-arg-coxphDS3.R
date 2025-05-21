@@ -13,7 +13,7 @@
 # Set up
 #
 
-context("datadistDS::arg::setup")
+context("coxphDS3::arg::setup")
 
 set.standard.disclosure.settings()
 
@@ -21,25 +21,15 @@ set.standard.disclosure.settings()
 # Tests
 #
 
-context("datadistDS::arg::data not data.frame")
-test_that("data not data.frame", {
-    data_arg <- "data_obj"
-
-    expect_error(datadistDS(data = data_arg), "object 'data_obj' not found", fixed = TRUE)
-})
-
-context("datadistDS::arg::data is data.frame")
-test_that("data is data.frame", {
-    data_arg <- "data"
-    data     <- data.frame()
-
-    expect_error(datadistDS(data = data_arg), "you must specify individual variables or a data frame", fixed = TRUE)
+context("coxphDS3::arg::all paramters are NULL")
+test_that("all paramters are NULL", {
+    expect_error(coxphDS3(df = NULL, expl_vars = NULL, time_col = NULL, censor_col = NULL, beta.tr = NULL, unique_event_times), "non-character argument", fixed = TRUE)
 })
 
 #
 # Done
 #
 
-context("datadistDS::arg::shutdown")
+context("coxphDS3::arg::shutdown")
 
-context("datadistDS::arg::done")
+context("coxphDS3::arg::done")
