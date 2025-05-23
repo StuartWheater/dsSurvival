@@ -33,16 +33,30 @@ test_that("null parameters predictDS", {
 
 context("predictDS::arg::null parameter value")
 test_that("null parameter value predictDS", {
+
+    expect_error(predictDS("obj"), "The specified model object does not exist", fixed = TRUE)
+})
+
+context("predictDS::arg::null parameter value")
+test_that("null parameter value predictDS", {
     object <- NULL
 
-    expect_error(predictDS("object"), "The specified model object does not exist", fixed = TRUE)
+    expect_error(predictDS("object"), "The specified model is not an rms model", fixed = TRUE)
 })
 
 context("predictDS::arg::number parameter value")
 test_that("number parameter value predictDS", {
     object <- 1.0
 
-    expect_error(predictDS("object"), "The specified model object does not exist", fixed = TRUE)
+    expect_error(predictDS("object"), "The specified model is not an rms model", fixed = TRUE)
+})
+
+context("predictDS::arg::number parameter value")
+test_that("number parameter value predictDS", {
+    fit         <- "fit_obj"
+    fit_obj_var <- 1.0
+
+    expect_error(predictDS(fit = fit), "", fixed = TRUE)
 })
 
 #

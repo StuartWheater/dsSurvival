@@ -23,7 +23,7 @@ predictDS <- function(fit = NULL,
                      conf.type = c("mean", "individual"),
                      ref.zero = FALSE) {
 
-  if (!exists(fit)) {
+  if (!exists(fit, envir = parent.frame())) {
       stop("The specified model object does not exist", call.=FALSE)
   }
 
