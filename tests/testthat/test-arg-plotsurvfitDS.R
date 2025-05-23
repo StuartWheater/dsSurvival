@@ -21,6 +21,14 @@ set.standard.disclosure.settings()
 # Tests
 #
 
+context("plotsurvfitDS::arg::dataName valid")
+test_that("dataName valid", {
+    dataName = "data_obj"
+    data_obj = NULL
+
+    expect_error(plotsurvfitDS(formula = NULL, dataName = dataName), "The formula must be set for use in survival::coxph()", fixed = TRUE)
+})
+
 context("plotsurvfitDS::arg::formula is NULL")
 test_that("formula is NULL", {
     expect_error(plotsurvfitDS(formula = NULL), "The formula must be set for use in survival::coxph()", fixed = TRUE)
