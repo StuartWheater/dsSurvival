@@ -31,19 +31,19 @@ rmsTransDS <- function(x = NULL,
     nfilter.tab <- as.numeric(thr$nfilter.tab)                             #
     #########################################################################
     
+    # Evaluate x in the parent frame
+    x_param <- eval(parse(text=x), envir = parent.frame())
+    
     # Check if x is provided
-    if (is.null(x)) {
+    if (is.null(x_param)) {
         stop("Variable name (x) must be provided.", call.=FALSE)
     }
     
     # Check type for x parameter
-    class_x <- dsBase::classDS(x=x)
+    class_x <- class(x_param)
     if (!('numeric' %in% class_x) & !('integer' %in% class_x)) {
         stop('Variable to be transformed (x) must be numeric or integer.', call.=FALSE)
     }
-    
-    # Evaluate x in the parent frame
-    x_param <- eval(parse(text=x), envir = parent.frame())
     
     # Check minimum sample size using nfilter.tab
     if (length(stats::na.omit(x_param)) < nfilter.tab) {
