@@ -38,7 +38,7 @@ test_that("valid x parameter", {
     x     <- "x_val"
     x_val <- "test"
 
-#    expect_error(rmsTransDS(x = x), "Variable", fixed = TRUE)
+    expect_error(rmsTransDS(x = x), "object 'x_val' not found", fixed = TRUE)
 })
 
 #
