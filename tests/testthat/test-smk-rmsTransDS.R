@@ -135,6 +135,20 @@ test_that("transformation is gTrans", {
 #    expect_length(res, 32)
 })
 
+context("rmsTransDS::smk::transformation is lsp, knots parms")
+test_that("transformation is lsp, knots parms", {
+    x              <- "D"
+    transformation <- "lsp"
+    parms          <- "knots"
+    knots          <- 6
+
+    D <- c(1, 2, 3, 4, 5, 6, 7, 8)
+
+    res <- rmsTransDS(x = x, transformation = transformation, parms = parms)
+    expect_equal(class(res), "rms")
+    expect_length(res, 16)
+})
+
 #
 # Done
 #
