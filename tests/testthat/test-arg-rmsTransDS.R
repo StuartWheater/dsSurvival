@@ -36,10 +36,29 @@ test_that("null x parameter", {
 context("rmsTransDS::arg::valid x parameter")
 test_that("valid x parameter", {
     x     <- "x_val"
-    x_val <- "test"
 
     expect_error(rmsTransDS(x = x), "object 'x_val' not found", fixed = TRUE)
 })
+
+context("rmsTransDS::arg::valid x parameter class")
+test_that("valid x parameter class", {
+    x     <- "x_val"
+    x_val <- "test"
+
+    expect_error(rmsTransDS(x = x), "Variable to be transformed (x) must be numeric or integer.", fixed = TRUE)
+})
+
+context("rmsTransDS::smk::transformation is dummy")
+test_that("transformation is dummy", {
+    x              <- "D"
+    transformation <- "dummy"
+    parms          <- NULL
+
+    D <- c(1, 2, 3, 4, 5, 6, 7, 8)
+
+    expect_error(rmsTransDS(x = x, transformation = transformation, parms = parms), "Invalid transformation. Must be one of: rcs, asis, pol, lsp, catg, scored, strat, gTrans", fixed = TRUE)
+})
+
 
 #
 # Done
