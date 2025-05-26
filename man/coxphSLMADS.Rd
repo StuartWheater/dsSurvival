@@ -7,7 +7,7 @@
 coxphSLMADS(
   formula = NULL,
   dataName = NULL,
-  .weights = NULL,
+  weights = NULL,
   init = NULL,
   ties = "efron",
   singular.ok = TRUE,
@@ -23,7 +23,7 @@ wildcards) specifying a formula.}
 
 \item{dataName}{character string of name of data frame}
 
-\item{.weights}{vector of case weights}
+\item{weights}{vector of case weights}
 
 \item{init}{vector of initial values of the iteration}
 

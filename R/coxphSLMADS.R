@@ -9,7 +9,7 @@
 #' @param formula either NULL or a character string (potentially including '*'
 #' wildcards) specifying a formula.
 #' @param dataName character string of name of data frame
-#' @param .weights vector of case weights
+#' @param weights vector of case weights
 #' @param init vector of initial values of the iteration
 #' @param ties character string specifying the method for tie handling.
 #'          The Efron approximation is used as the default. Other options are
@@ -27,7 +27,7 @@
 #' @author Soumya Banerjee and Tom Bishop (2020), updated by Demetris Avraam (May, 2025).
 #' @export
 #' 
-coxphSLMADS <- function(formula = NULL, dataName = NULL, .weights = NULL,
+coxphSLMADS <- function(formula = NULL, dataName = NULL, weights = NULL,
                       init = NULL, ties = 'efron', singular.ok = TRUE,
                       model = FALSE, x = FALSE, y = TRUE,
                       control = NULL){
@@ -42,13 +42,14 @@ coxphSLMADS <- function(formula = NULL, dataName = NULL, .weights = NULL,
   }else{
     dataTable <- eval(parse(text=dataName), envir = parent.frame())
   }
-      
+  
+  # assigning the weights_obj is needed for compatibility with DSLite
   str <- paste0('weights_obj <- NULL')
   eval(parse(text=str), envir = parent.frame())
-  if(is.null(.weights)){
+  if(is.null(weights)){
     weights_obj <- NULL 
   }else{
-    weights_obj <- eval(parse(text=.weights), envir = parent.frame())
+    weights_obj <- eval(parse(text=weights), envir = parent.frame())
   }
       
       # check if formula is set
