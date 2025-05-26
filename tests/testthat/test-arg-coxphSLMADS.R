@@ -32,7 +32,7 @@ test_that("null parameters coxphSLMADS", {
     dataName_arg <- NULL
     weights_arg  <- NULL
 
-    expect_error(coxphSLMADS(formula = formula_arg, dataName = dataName_arg, .weights = weights_arg), "The formula must be set for use in survival::coxph()", fixed = TRUE)
+    expect_error(coxphSLMADS(formula = formula_arg, dataName = dataName_arg, weights = weights_arg), "The formula must be set for use in survival::coxph()", fixed = TRUE)
 })
 
 context("coxphSLMADS::arg::absent dataName parameters")
@@ -40,7 +40,7 @@ test_that("null parameters coxphSLMADS", {
     formula_arg <- NULL
     weights_arg <- NULL
 
-    expect_error(coxphSLMADS(formula = formula_arg, .weights = weights_arg), "The formula must be set for use in survival::coxph()", fixed = TRUE)
+    expect_error(coxphSLMADS(formula = formula_arg, weights = weights_arg), "The formula must be set for use in survival::coxph()", fixed = TRUE)
 })
 
 context("coxphSLMADS::arg::absent weights parameters")
@@ -57,7 +57,7 @@ test_that("null parameters coxphSLMADS", {
     weights_arg <- "weights"
     weights_arg <- c() 
 
-    expect_error(coxphSLMADS(formula = formula_arg, .weights = weights_arg), "The formula must be set for use in survival::coxph()", fixed = TRUE)
+    expect_error(coxphSLMADS(formula = formula_arg, weights = weights_arg), "The formula must be set for use in survival::coxph()", fixed = TRUE)
 })
 
 context("coxphSLMADS::arg::absent weights parameters with value")
@@ -74,7 +74,7 @@ test_that("null parameters coxphSLMADS", {
     formula_arg <- NULL
     weights_arg <- "weights_obj"
 
-    expect_error(coxphSLMADS(formula = formula_arg, .weights = weights_arg), "The formula must be set for use in survival::coxph()", fixed = TRUE)
+    expect_error(coxphSLMADS(formula = formula_arg, weights = weights_arg), "The formula must be set for use in survival::coxph()", fixed = TRUE)
 })
 
 context("coxphSLMADS::arg::absent weights parameters without value")

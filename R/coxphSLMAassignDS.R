@@ -9,7 +9,7 @@
 #' @param formula either NULL or a character string (potentially including '*'
 #' wildcards) specifying a formula.
 #' @param dataName character string of name of data frame
-#' @param .weights vector of case weights
+#' @param weights vector of case weights
 #' @param init vector of initial values of the iteration
 #' @param ties character string specifying the method for tie handling.
 #'          The Efron approximation is used as the default. Other options are
@@ -29,7 +29,7 @@
 #' @export
 coxphSLMAassignDS<-function(formula = NULL,
                             dataName = NULL,
-                            .weights = NULL,
+                            weights = NULL,
                             init = NULL,
                             ties = 'efron',
                             singular.ok = TRUE,
@@ -57,7 +57,7 @@ coxphSLMAassignDS<-function(formula = NULL,
       #datashield.privacyLevel<-as.numeric(thr$datashield.privacyLevel)       #
       #########################################################################
       
-      # get the value of the 'data' and '.weights' parameters provided as character on the client side
+      # get the value of the 'data' and 'weights' parameters provided as character on the client side
       if(is.null(dataName))
       {
          dataTable <- NULL 
@@ -173,7 +173,7 @@ coxphSLMAassignDS<-function(formula = NULL,
               if (use.rms) {
                 cxph_serverside <- rms::cph(formula = formula,
                                                  data = dataTable,
-                                                 weights = .weights,
+                                                 weights = weights,
                                                  init = init,
                                                  ties = ties,
                                                  singular.ok = singular.ok,
@@ -184,7 +184,7 @@ coxphSLMAassignDS<-function(formula = NULL,
               } else {
                 cxph_serverside <- survival::coxph(formula = formula,
                                                  data = dataTable,
-                                                 weights = .weights,
+                                                 weights = weights,
                                                  ties = ties,
                                                  singular.ok = singular.ok,
                                                  model = model,
@@ -198,7 +198,7 @@ coxphSLMAassignDS<-function(formula = NULL,
         if (use.rms) {
               cxph_serverside <- rms::cph(formula = formula,
                                                  data = dataTable,
-                                                 weights = .weights,
+                                                 weights = weights,
                                                  ties = ties,
                                                  singular.ok = singular.ok,
                                                  model = model,
@@ -208,7 +208,7 @@ coxphSLMAassignDS<-function(formula = NULL,
         } else {
               cxph_serverside <- survival::coxph(formula = formula,
                                                  data = dataTable,
-                                                 weights = .weights,
+                                                 weights = weights,
                                                  ties = ties,
                                                  singular.ok = singular.ok,
                                                  model = model,
