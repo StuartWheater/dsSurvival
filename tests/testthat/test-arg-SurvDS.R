@@ -1,4 +1,5 @@
 #-------------------------------------------------------------------------------
+# Copyright (c) 2025 XXXX. All rights reserved.
 # Copyright (c) 2024 Arjuna Technologies, Newcastle upon Tyne. All rights reserved.
 #
 # This program and the accompanying materials
@@ -58,26 +59,15 @@ test_that("valid times parameters SurvDS", {
     expect_error(SurvDS(time, time2, event, type, origin), "Event parameter (event) must be numeric or integer or factor.", fixed = TRUE)
 })
 
-context("SurvDS::arg::valid times and event parameters")
-test_that("valid times and event parameters SurvDS", {
+context("SurvDS::arg::invalid time2 parameter")
+test_that("invalid time2 parameter SurvDS", {
     time   <- 1234
-    time2  <- 2345
-    event  <- 1567
+    time2  <- NA
+    event  <- NULL
     type   <- NULL
     origin <- NULL
 
-    expect_warning(SurvDS(time, time2, event, type, origin), "Invalid status value, converted to NA", fixed = TRUE)
-})
-
-context("SurvDS::arg::valid time and event parameters")
-test_that("valid time and event parameters SurvDS", {
-    time   <- 1234
-    time2  <- NULL
-    event  <- 1567
-    type   <- NULL
-    origin <- NULL
-
-    expect_warning(SurvDS(time, time2, event, type, origin), "Invalid status value, converted to NA", fixed = TRUE)
+    expect_error(SurvDS(time, time2, event, type, origin), "Stop time parameter (time2) must be numeric or integer", fixed = TRUE)
 })
 
 #

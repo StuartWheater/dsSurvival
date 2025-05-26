@@ -1,11 +1,21 @@
 AggregateMethods:
+    coxphDS1,
+    coxphDS2,
+    coxphDS3,
     coxphSLMADS,
     coxphSummaryDS,
     cox.zphSLMADS,
     summarySurvDS,
     plotsurvfitDS,
-    vcovDS.coxph
+    vcovDS.coxph,
+    useDatadistDS,
+    acmPlotDS
 AssignMethods:
     coxphSLMAassignDS,
     SurvDS,
-    survfitDS
+    survfitDS,
+    datadistDS,
+    rcsDS,
+    predictDS,
+    finegrayDS,
+    rmsTransDS

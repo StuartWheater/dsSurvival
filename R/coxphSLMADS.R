@@ -9,7 +9,7 @@
 #' @param formula either NULL or a character string (potentially including '*'
 #' wildcards) specifying a formula.
 #' @param dataName character string of name of data frame
-#' @param weights vector of case weights
+#' @param .weights vector of case weights
 #' @param init vector of initial values of the iteration
 #' @param ties character string specifying the method for tie handling.
 #'          The Efron approximation is used as the default. Other options are
@@ -27,7 +27,7 @@
 #' @author Soumya Banerjee and Tom Bishop (2020), updated by Demetris Avraam (May, 2025).
 #' @export
 #' 
-coxphSLMADS <- function(formula = NULL, dataName = NULL, weights = NULL,
+coxphSLMADS <- function(formula = NULL, dataName = NULL, .weights = NULL,
                       init = NULL, ties = 'efron', singular.ok = TRUE,
                       model = FALSE, x = FALSE, y = TRUE,
                       control = NULL){
@@ -36,17 +36,17 @@ coxphSLMADS <- function(formula = NULL, dataName = NULL, weights = NULL,
   thr <- dsBase::listDisclosureSettingsDS()
   nfilter.glm    <- as.numeric(thr$nfilter.glm)
       
-  # get the value of the 'data' and 'weights' parameters provided as character on the client side
+  # get the value of the 'data' and '.weights' parameters provided as character on the client side
   if(is.null(dataName)){
     dataTable <- NULL 
   }else{
     dataTable <- eval(parse(text=dataName), envir = parent.frame())
   }
       
-  if(is.null(weights)){
+  if(is.null(.weights)){
     weights_obj <- NULL 
   }else{
-    weights_obj <- eval(parse(text=weights), envir = parent.frame())
+    weights_obj <- eval(parse(text=.weights), envir = parent.frame())
   }
       
       # check if formula is set
@@ -63,6 +63,15 @@ coxphSLMADS <- function(formula = NULL, dataName = NULL, weights = NULL,
       #formula = as.formula(paste(formula,collapse="|"))
       formula <- Reduce(paste, deparse(formula))
       formula <- gsub("sssss", "survival::Surv(", formula, fixed = TRUE)
+      formula <- gsub("ggggg", "rms::rcs(", formula, fixed = TRUE)
+      formula <- gsub("aaaaa", "rms::asis(", formula, fixed = TRUE)
+      formula <- gsub("mmmmm", "rms::matrx(", formula, fixed = TRUE)
+      formula <- gsub("ooooo", "rms::pol(", formula, fixed = TRUE)
+      formula <- gsub("hhhhh", "rms::lsp(", formula, fixed = TRUE)
+      formula <- gsub("ccccc", "rms::catg(", formula, fixed = TRUE)
+      formula <- gsub("ddddd", "rms::scored(", formula, fixed = TRUE)
+      formula <- gsub("nnnnn", "rms::strat(", formula, fixed = TRUE)
+      formula <- gsub("ttttt", "rms::gTrans(", formula, fixed = TRUE)
       formula <- gsub("lll", "=", formula, fixed = TRUE)
       formula <- gsub("xxx", "|", formula, fixed = TRUE)
       formula <- gsub("yyy", "(", formula, fixed = TRUE)

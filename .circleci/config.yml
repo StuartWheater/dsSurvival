@@ -46,6 +46,7 @@ jobs:
               sudo Rscript -e "install.packages('MatrixModels', dependencies=TRUE)"
               sudo Rscript -e "remotes::install_github('datashield/dsBase@6.3.1')"
               sudo Rscript -e "install.packages('fANCOVA', dependencies=TRUE)"
+              sudo Rscript -e "install.packages('rms', dependencies=TRUE)"
 
               sudo Rscript -e "install.packages('lme4', dependencies=TRUE)"
               sudo Rscript -e "install.packages('covr', dependencies=TRUE)"
