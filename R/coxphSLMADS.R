@@ -43,6 +43,7 @@ coxphSLMADS <- function(formula = NULL, dataName = NULL, .weights = NULL,
     dataTable <- eval(parse(text=dataName), envir = parent.frame())
   }
       
+  weights_obj <- ''
   if(is.null(.weights)){
     weights_obj <- NULL 
   }else{
