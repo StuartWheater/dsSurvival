@@ -74,7 +74,7 @@ test_that("null parameters coxphSLMADS", {
     formula_arg <- NULL
     weights_arg <- "weights_obj"
 
-    expect_error(coxphSLMADS(formula = formula_arg, .weights = weights_arg), "object 'weights_obj' not found", fixed = TRUE)
+    expect_error(coxphSLMADS(formula = formula_arg, .weights = weights_arg), "The formula must be set for use in survival::coxph()", fixed = TRUE)
 })
 
 context("coxphSLMADS::arg::absent weights parameters without value")
