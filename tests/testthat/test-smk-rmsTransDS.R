@@ -126,13 +126,13 @@ context("rmsTransDS::smk::transformation is gTrans")
 test_that("transformation is gTrans", {
     x              <- "D"
     transformation <- "gTrans"
-    parms          <- NULL
+    parms          <- "exp"
 
     D <- c(1, 2, 3, 4, 5, 6, 7, 8)
 
-#    res <- rmsTransDS(x = x, transformation = transformation, parms = parms)
-#    expect_equal(class(res), "rms")
-#    expect_length(res, 32)
+    res <- rmsTransDS(x = x, transformation = transformation, parms = parms)
+    expect_equal(class(res), "rms")
+    expect_length(res, 8)
 })
 
 context("rmsTransDS::smk::transformation is lsp, knots parms")
