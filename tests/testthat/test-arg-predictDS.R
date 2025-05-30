@@ -56,7 +56,18 @@ test_that("number parameter value predictDS", {
     fit         <- "fit_obj"
     fit_obj_var <- 1.0
 
-    expect_error(predictDS(fit = fit), "", fixed = TRUE)
+    expect_error(predictDS(fit = fit), "The specified model object does not exist", fixed = TRUE)
+})
+
+context("predictDS::arg::fun check")
+test_that("fun check", {
+    dataObj <- data.frame(y = c(1, 2, 3, 4, 5, 6), age = c(1, 2, 3, 4, 5, 6))
+    dd      <- datadist(dataObj)
+    options(datadist = dd)
+    fit_var <- "fit_obj"
+    fit_obj <- ols(y ~ age, data = dataObj)
+
+    expect_error(predictDS(fit = fit_var, fun = "test"), "Disclosure risk: only standard transformations are allowed", fixed = TRUE)
 })
 
 #
