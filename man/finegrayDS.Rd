@@ -7,7 +7,7 @@
 finegrayDS(
   formula = NULL,
   data = NULL,
-  .weights = NULL,
+  weights_obj = NULL,
   na.action = "na.pass",
   etype = NULL,
   prefix = "fg",
@@ -21,7 +21,7 @@ finegrayDS(
 
 \item{data}{character string specifying the name of a data frame}
 
-\item{.weights}{character string specifying the name of a weights variable (optional)}
+\item{weights_obj}{character string specifying the name of a weights variable (optional)}
 
 \item{na.action}{character string specifying how to handle missing values}
 
