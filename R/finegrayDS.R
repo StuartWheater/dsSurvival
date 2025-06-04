@@ -7,7 +7,7 @@
 #' 
 #' @param formula character string or an object of class formula specifying the model
 #' @param data character string specifying the name of a data frame
-#' @param .weights character string specifying the name of a weights variable (optional)
+#' @param weights_obj character string specifying the name of a weights variable (optional)
 #' @param na.action character string specifying how to handle missing values
 #' @param etype the event type for which a data set will be generated (character or numeric)
 #' @param prefix prefix for the new variables that will be added to the dataset
@@ -19,7 +19,7 @@
 #' @export
 finegrayDS <- function(formula = NULL,
                       data = NULL,
-                      .weights = NULL,
+                      weights_obj = NULL,
                       na.action = "na.pass",
                       etype = NULL,
                       prefix = "fg",
@@ -60,8 +60,8 @@ finegrayDS <- function(formula = NULL,
 
   call_args <- list(formula = formula, data = dataDF)
 
-  if (!is.null(.weights)) {
-    weights_var <- eval(parse(text = .weights), envir = parent.frame())
+  if (!is.null(weights_obj)) {
+    weights_var <- eval(parse(text = weights_obj), envir = parent.frame())
     call_args$weights <- weights_var
   }
 
