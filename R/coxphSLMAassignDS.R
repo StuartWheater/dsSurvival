@@ -9,7 +9,7 @@
 #' @param formula either NULL or a character string (potentially including '*'
 #' wildcards) specifying a formula.
 #' @param dataName character string of name of data frame
-#' @param weights vector of case weights
+#' @param weights_obj vector of case weights
 #' @param init vector of initial values of the iteration
 #' @param ties character string specifying the method for tie handling.
 #'          The Efron approximation is used as the default. Other options are
@@ -29,7 +29,7 @@
 #' @export
 coxphSLMAassignDS<-function(formula = NULL,
                             dataName = NULL,
-                            weights = NULL,
+                            weights_obj = NULL,
                             init = NULL,
                             ties = 'efron',
                             singular.ok = TRUE,
@@ -99,8 +99,9 @@ coxphSLMAassignDS<-function(formula = NULL,
 
       # convert back to formula
       formula <- stats::as.formula(formula)
-      
-      
+      formula <- stats::as.formula(paste0(Reduce(paste, deparse(formula))), env = parent.frame())
+
+
       #    formulatext <- Reduce(paste, deparse(formula))
       #    originalFormula <- formulatext
       #   
@@ -150,9 +151,9 @@ coxphSLMAassignDS<-function(formula = NULL,
 	    #	and an expression of the form a ~ b is required	  
 	    control <- gsub("~bbbb", "", control, fixed = TRUE)   
             control <- gsub("aaaaa", "survival::coxph.control(", control, fixed =  TRUE)
-   	    control <- gsub("xxx", "|", control, fixed = TRUE)
-   	    control <- gsub("yyy", "(", control, fixed = TRUE)
-   	    control <- gsub("zzz", ")", control, fixed = TRUE)
+            control <- gsub("xxx", "|", control, fixed = TRUE)
+            control <- gsub("yyy", "(", control, fixed = TRUE)
+            control <- gsub("zzz", ")", control, fixed = TRUE)
 	    control <- gsub("ppp", "/", control, fixed = TRUE)
 	    control <- gsub("qqq", ":", control, fixed = TRUE)
 	    control <- gsub("rrr", ",", control, fixed = TRUE)
@@ -173,7 +174,7 @@ coxphSLMAassignDS<-function(formula = NULL,
               if (use.rms) {
                 cxph_serverside <- rms::cph(formula = formula,
                                                  data = dataTable,
-                                                 weights = weights,
+                                                 weights = weights_obj,
                                                  init = init,
                                                  ties = ties,
                                                  singular.ok = singular.ok,
@@ -184,7 +185,7 @@ coxphSLMAassignDS<-function(formula = NULL,
               } else {
                 cxph_serverside <- survival::coxph(formula = formula,
                                                  data = dataTable,
-                                                 weights = weights,
+                                                 weights = weights_obj,
                                                  ties = ties,
                                                  singular.ok = singular.ok,
                                                  model = model,
@@ -198,7 +199,7 @@ coxphSLMAassignDS<-function(formula = NULL,
         if (use.rms) {
               cxph_serverside <- rms::cph(formula = formula,
                                                  data = dataTable,
-                                                 weights = weights,
+                                                 weights = weights_obj,
                                                  ties = ties,
                                                  singular.ok = singular.ok,
                                                  model = model,
@@ -208,7 +209,7 @@ coxphSLMAassignDS<-function(formula = NULL,
         } else {
               cxph_serverside <- survival::coxph(formula = formula,
                                                  data = dataTable,
-                                                 weights = weights,
+                                                 weights = weights_obj,
                                                  ties = ties,
                                                  singular.ok = singular.ok,
                                                  model = model,
