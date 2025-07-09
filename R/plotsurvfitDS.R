@@ -12,30 +12,7 @@
 #' @return a privacy preserving survival curve from the server side environment.
 #' @author Soumya Banerjee, Demetris Avraam, Paul Burton and Tom RP Bishop (2022).
 #' @export
-plotsurvfitDS<-function(formula = NULL,
-                        dataName = NULL#,
-			# method_anonymization = 3,
-			# noise = 0.03,
-			# knn = 20
-                       )
-{
-  
-  errorMessage <- "No errors"
-  
-  #########################################################################
-  # DataSHIELD MODULE: CAPTURE THE nfilter SETTINGS                       #
-  # thr <- dsBase::listDisclosureSettingsDS()                             #
-  #nfilter.tab<-as.numeric(thr$nfilter.tab)                               #
-  #nfilter.glm<-as.numeric(thr$nfilter.glm)                               #
-  #nfilter.subset<-as.numeric(thr$nfilter.subset)                         #
-  # nfilter.string <- as.numeric(thr$nfilter.string)                      #
-  #nfilter.tab    <- as.numeric(thr$nfilter.tab)                          #
-  #nfiter.glm    <- as.numeric(thr$nfilter.glm)                           #
-  #nfilter.noise  <- as.numeric(thr$nfilter.noise)                        #
-  #nfilter.stringShort<-as.numeric(thr$nfilter.stringShort)               #
-  #nfilter.kNN    <- as.numeric(thr$nfilter.kNN)                          #
-  #datashield.privacyLevel<-as.numeric(thr$datashield.privacyLevel)       #
-  #########################################################################
+plotsurvfitDS <- function(formula = NULL, dataName = NULL){
   
   # get the value of the 'data' parameter provided as character on the client side
   if(is.null(dataName))
@@ -53,7 +30,7 @@ plotsurvfitDS<-function(formula = NULL,
     stop("The formula must be set for use in survival::coxph()", call.=FALSE)
   }
   
-
+  
   # get survfit model
   survfit_model_variable = eval(parse(text=formula), envir = parent.frame())
   
@@ -66,20 +43,20 @@ plotsurvfitDS<-function(formula = NULL,
   ################################################
   # if (method_anonymization == 3) 	
   # {
-      # TODO: make it depend on number of data points on X axis 	
-      # f_span = 0.30	 # useable span 0.3-0.55
-      # smoothed_survfit = stats::loess(survfit_model_variable$surv ~ survfit_model_variable$time, span = f_span)	
-      
-      # predict
-      # predict_smoothed_survfit = stats::predict(smoothed_survfit)  	
-	  
-      # TODO: modify last point and make sure not negative and not greater than previous point	
-      # assign to surv variable the smoothed data	
-      # TODO: use automated way to determine span loess.as() in fANCOVA package 	
-      # survfit_model_variable$surv = predict_smoothed_survfit
+  # TODO: make it depend on number of data points on X axis 	
+  # f_span = 0.30	 # useable span 0.3-0.55
+  # smoothed_survfit = stats::loess(survfit_model_variable$surv ~ survfit_model_variable$time, span = f_span)	
+  
+  # predict
+  # predict_smoothed_survfit = stats::predict(smoothed_survfit)  	
+  
+  # TODO: modify last point and make sure not negative and not greater than previous point	
+  # assign to surv variable the smoothed data	
+  # TODO: use automated way to determine span loess.as() in fANCOVA package 	
+  # survfit_model_variable$surv = predict_smoothed_survfit
   # }
   # end if  	
-
+  
   ##########################################################	
   # LOESS smoothing fit with automated span determination
   ##########################################################	
@@ -98,31 +75,38 @@ plotsurvfitDS<-function(formula = NULL,
   
   # overwrite surv field in survfit object	
   survfit_model_variable$surv = smoothed_survfit
-	
+  
   ########################################################	
   # remove or perturb potentially disclosive elements	
   ########################################################	
   # survfit_model_variable$n.event = NULL
   # survfit_model_variable$n.risk  = NULL
-
+  
   # smoother for n.event	
   temp_fit_1 = fANCOVA::loess.as(survfit_model_variable$time, survfit_model_variable$n.event, plot=FALSE)	
   # predict
   temp_fit_1_predict = stats::predict(temp_fit_1)
   # overwrite	
   survfit_model_variable$n.event = temp_fit_1_predict
-	
+  
   # smoother for n.risk
   temp_fit_2 = fANCOVA::loess.as(survfit_model_variable$time, survfit_model_variable$n.risk, plot=FALSE)	
   # predict
   temp_fit_2_predict = stats::predict(temp_fit_2)	
   # overwrite
   survfit_model_variable$n.risk = temp_fit_2_predict
-	
-	
+  
+  # smoother for n.censor
+  temp_fit_3 = fANCOVA::loess.as(survfit_model_variable$time, survfit_model_variable$n.censor, plot = FALSE)
+  # predict
+  temp_fit_3_predict = stats::predict(temp_fit_3)
+  # overwrite
+  survfit_model_variable$n.censor = temp_fit_3_predict
+  
+  
   # return modified survfit object
   return(survfit_model_variable)
-
+  
 }
 #AGGREGATE FUNCTION
 # plotsurvfitDS
