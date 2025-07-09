@@ -9,7 +9,7 @@
 #' @param formula either NULL or a character string (potentially including '*'
 #' wildcards) specifying a formula.
 #' @param dataName character string of name of data frame
-#' @param weights vector of case weights
+#' @param weights_obj vector of case weights
 #' @param init vector of initial values of the iteration
 #' @param ties character string specifying the method for tie handling.
 #'          The Efron approximation is used as the default. Other options are
@@ -27,7 +27,7 @@
 #' @author Soumya Banerjee and Tom Bishop (2020), updated by Demetris Avraam (May, 2025).
 #' @export
 #' 
-coxphSLMADS <- function(formula = NULL, dataName = NULL, weights = NULL,
+coxphSLMADS <- function(formula = NULL, dataName = NULL, weights_obj = NULL,
                       init = NULL, ties = 'efron', singular.ok = TRUE,
                       model = FALSE, x = FALSE, y = TRUE,
                       control = NULL){
@@ -36,7 +36,7 @@ coxphSLMADS <- function(formula = NULL, dataName = NULL, weights = NULL,
   thr <- dsBase::listDisclosureSettingsDS()
   nfilter.glm    <- as.numeric(thr$nfilter.glm)
       
-  # get the value of the 'data' and '.weights' parameters provided as character on the client side
+  # get the value of the 'data' and 'weights_obj' parameters provided as character on the client side
   if(is.null(dataName)){
     dataTable <- NULL 
   }else{
@@ -46,10 +46,10 @@ coxphSLMADS <- function(formula = NULL, dataName = NULL, weights = NULL,
   # assigning the weights_obj is needed for compatibility with DSLite
   str <- paste0('weights_obj <- NULL')
   eval(parse(text=str), envir = parent.frame())
-  if(is.null(weights)){
+  if(is.null(weights_obj)){
     weights_obj <- NULL 
   }else{
-    weights_obj <- eval(parse(text=weights), envir = parent.frame())
+    weights_obj <- eval(parse(text=weights_obj), envir = parent.frame())
   }
       
       # check if formula is set
@@ -114,10 +114,10 @@ coxphSLMADS <- function(formula = NULL, dataName = NULL, weights = NULL,
 	    control <- gsub("~ bbbb", "", control, fixed = TRUE)
 	    control <- gsub("~", "", control, fixed = TRUE)
 	    control <- gsub("bbbb", "", control, fixed = TRUE)
-      control <- gsub("aaaaa", "survival::coxph.control(", control, fixed =  TRUE)
-   	  control <- gsub("xxx", "|", control, fixed = TRUE)
-   	  control <- gsub("yyy", "(", control, fixed = TRUE)
-   	  control <- gsub("zzz", ")", control, fixed = TRUE)
+            control <- gsub("aaaaa", "survival::coxph.control(", control, fixed =  TRUE)
+            control <- gsub("xxx", "|", control, fixed = TRUE)
+            control <- gsub("yyy", "(", control, fixed = TRUE)
+            control <- gsub("zzz", ")", control, fixed = TRUE)
 	    control <- gsub("ppp", "/", control, fixed = TRUE)
 	    control <- gsub("qqq", ":", control, fixed = TRUE)
 	    control <- gsub("rrr", ",", control, fixed = TRUE)
