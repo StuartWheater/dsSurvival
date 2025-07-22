@@ -1,5 +1,5 @@
 #-------------------------------------------------------------------------------
-# Copyright (c) 2025 XXXX. All rights reserved.
+# Copyright (c) 2025 ProPASS Consortium. All rights reserved.
 # Copyright (c) 2024 Arjuna Technologies, Newcastle upon Tyne. All rights reserved.
 #
 # This program and the accompanying materials
@@ -76,7 +76,9 @@ context("coxphSLMAassignDS::smk::simple example, without init with use.rms")
 test_that("simple example, without init, with use.rms", {
     surv_obj <- Surv(time = c(1.0, 1.1, 1.2, 1.3, 1.4, 1.5), event = c(1, 1, 0, 1, 0, 0))
 
-    formula_arg  <- stats::as.formula("Surv(dataObj$time, dataObj$event) ~ dataObj$age + dataObj$edu")
+    # formula_arg  <- stats::as.formula("Surv(dataObj$time, dataObj$event) ~ dataObj$age + dataObj$edu")
+    formula_arg  <- "sssssdataObj$timerrr dataObj$eventzzz ~ dataObj$age + dataObj$edu"
+    #formula_arg  <- "Surv(dataObj$time dataObj$event) ~ dataObj$age + dataObj$edu"
     dataName_arg <- "dataObj"
     weights_arg  <- "weights_obj"
     control_arg  <- survival::coxph.control()
@@ -87,7 +89,8 @@ test_that("simple example, without init, with use.rms", {
     weights_obj <- c(1.0, 0.1, 0.5, 1.0, 0.9, 0.7, 1.0, 0.5)
 
     # TODO: Fix Test
-    res <- expect_error(coxphSLMAassignDS(formula = formula_arg, dataName = dataName_arg, weights_obj = weights_arg, control = control_arg, init = init_arg, use.rms = use.rms_arg))
+    # res <- expect_error(coxphSLMAassignDS(formula = formula_arg, dataName = dataName_arg, weights_obj = weights_arg, control = control_arg, init = init_arg, use.rms = use.rms_arg))
+    res <- coxphSLMAassignDS(formula = formula_arg, dataName = dataName_arg, weights_obj = weights_arg, control = control_arg, init = init_arg, use.rms = use.rms_arg)
 
     # expect_length(res, 22)
 })
@@ -107,7 +110,8 @@ test_that("simple example, with init and use.rms", {
     weights_obj <- c(1.0, 0.1, 0.5, 1.0, 0.9, 0.7, 1.0, 0.5)
 
     # TODO: Fix Test
-    res <- expect_error(coxphSLMAassignDS(formula = formula_arg, dataName = dataName_arg, weights_obj = weights_arg, control = control_arg, init = init_arg, use.rms = use.rms_arg))
+    # res <- expect_error(coxphSLMAassignDS(formula = formula_arg, dataName = dataName_arg, weights_obj = weights_arg, control = control_arg, init = init_arg, use.rms = use.rms_arg))
+    res <- coxphSLMAassignDS(formula = formula_arg, dataName = dataName_arg, weights_obj = weights_arg, control = control_arg, init = init_arg, use.rms = use.rms_arg)
 
     # expect_length(res, 22)
 })

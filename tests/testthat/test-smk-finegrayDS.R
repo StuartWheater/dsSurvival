@@ -1,5 +1,5 @@
 #-------------------------------------------------------------------------------
-# Copyright (c) 2025 XXXX. All rights reserved.
+# Copyright (c) 2025 ProPASS Consortium. All rights reserved.
 # Copyright (c) 2024 Arjuna Technologies, Newcastle upon Tyne. All rights reserved.
 #
 # This program and the accompanying materials
@@ -30,7 +30,8 @@ test_that("simple example", {
     data_val    <- data.frame(time = c(1.0, 2.0, 3.0, 4.0, 5.0, 6.0), event = c(1.0, 2.0, 3.0, 4.0, 5.0, 6.0), y = c(1.0, 2.0, 3.0, 4.0, 5.0, 6.0), a = c(1.0, 2.0, 3.0, 4.0, 5.0, 6.0))
 
     # ToDo: Fix error
-    expect_error(finegrayDS(formula = formula_arg, data = data_arg), "attempt to set an attribute on NULL")
+    # expect_error(finegrayDS(formula = formula_arg, data = data_arg), "attempt to set an attribute on NULL")
+    finegrayDS(formula = formula_arg, data = data_arg)
 })
 
 #
