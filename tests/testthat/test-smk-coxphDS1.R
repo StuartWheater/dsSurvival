@@ -13,7 +13,7 @@
 # Set up
 #
 
-context("coxphSummaryDS::arg::setup")
+context("coxphDS1::smk::setup")
 
 set.standard.disclosure.settings()
 
@@ -21,15 +21,24 @@ set.standard.disclosure.settings()
 # Tests
 #
 
-context("coxphSummaryDS::arg::x is NULL")
-test_that("x is NULL", {
-    expect_error(coxphSummaryDS(x = NULL), "The name of the server-side fit Cox proportional hazards model must be set", fixed = TRUE)
+context("coxphDS1::smk::simple example")
+test_that("simple example", {
+    dataframe <- data.frame(time = c(0.1, 0.1, 0.1, 0.2, 0.2, 0.2, 0.3, 0.3, 0.3), cens = c(1, 1, 1, 1, 1, 1, 1, 1, 1), age = c(22, 23, 24, 25, 26, 27, 26, 28, 29),
+y = c(100, 105, 110, 90, 95, 100, 100, 105, 101))
+
+    df_arg         <- "dataframe"
+    time_col_arg   <- "time"
+    censor_col_arg <- "cens"
+
+    res <- coxphDS1(df = df_arg, time_col = time_col_arg, censor_col = censor_col_arg)
+
+    expect_length(res, 6)
 })
 
 #
 # Done
 #
 
-context("coxphSummaryDS::arg::shutdown")
+context("coxphDS1::smk::shutdown")
 
-context("coxphSummaryDS::arg::done")
+context("coxphDS1::smk::done")

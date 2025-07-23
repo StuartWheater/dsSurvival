@@ -13,7 +13,7 @@
 # Set up
 #
 
-context("coxphSummaryDS::arg::setup")
+context("summarySurvDS::smk::setup")
 
 set.standard.disclosure.settings()
 
@@ -21,15 +21,19 @@ set.standard.disclosure.settings()
 # Tests
 #
 
-context("coxphSummaryDS::arg::x is NULL")
-test_that("x is NULL", {
-    expect_error(coxphSummaryDS(x = NULL), "The name of the server-side fit Cox proportional hazards model must be set", fixed = TRUE)
+context("summarySurvDS::smk::simple example")
+test_that("simple example", {
+    object_obj <- Surv(time = c(1.0, 1.1, 1.2, 1.3, 1.4, 1.5), event = c(1, 1, 0, 1, 0, 0))
+
+    res <- summarySurvDS(object = object_obj)
+    
+    expect_length(res, 2)
 })
 
 #
 # Done
 #
 
-context("coxphSummaryDS::arg::shutdown")
+context("summarySurvDS::smk::shutdown")
 
-context("coxphSummaryDS::arg::done")
+context("summarySurvDS::smk::done")

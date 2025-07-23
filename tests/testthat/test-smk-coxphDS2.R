@@ -13,7 +13,7 @@
 # Set up
 #
 
-context("predictDS::smk::setup")
+context("coxphDS2::smk::setup")
 
 set.standard.disclosure.settings()
 
@@ -21,26 +21,24 @@ set.standard.disclosure.settings()
 # Tests
 #
 
-context("predictDS::smk::simple example")
+context("coxphDS2::smk::simple example")
 test_that("simple example", {
-    dataObj <- data.frame(y = c(1, 2, 3, 4, 5, 6), age = c(1, 2, 3, 4, 5, 6))
-    dd      <- datadist(dataObj)
-    options(datadist = dd)
-    fit_var <- "fit_obj"
-    fit_obj <- ols(y ~ age, data = dataObj)
+    dataframe <- data.frame(time = c(0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8), event = c(TRUE, FALSE, TRUE, FALSE, FALSE, TRUE, TRUE, FALSE), age = c(22, 23, 24, 25, 26, 27, 26, 28), y = c(100, 105, 110, 90, 95, 100, 100, 105))
 
-    res <- predictDS(fit = fit_var)
-    
-    expect_length(res, 5)
-    res.classes <- class(res)
-    expect_true("Predict" %in% res.classes)
-    expect_true("data.frame" %in% res.classes)
+    df_arg                 <- "dataframe"
+    expl_vars_arg          <- "age,y"
+    time_col_arg           <- "time"
+    censor_col_arg         <- "event"
+
+    res <- coxphDS2(df = df_arg, expl_vars = expl_vars_arg, time_col = time_col_arg, censor_col = censor_col_arg)
+
+    expect_length(res, 2)
 })
 
 #
 # Done
 #
 
-context("predictDS::smk::shutdown")
+context("coxphDS2::smk::shutdown")
 
-context("predictDS::smk::done")
+context("coxphDS2::smk::done")

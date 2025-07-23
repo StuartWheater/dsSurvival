@@ -13,7 +13,7 @@
 # Set up
 #
 
-context("datadistDS::arg::setup")
+context("survfitDS::smk::setup")
 
 set.standard.disclosure.settings()
 
@@ -21,25 +21,21 @@ set.standard.disclosure.settings()
 # Tests
 #
 
-context("datadistDS::arg::data not data.frame")
-test_that("data not data.frame", {
-    data_arg <- "data_obj"
+context("survfitDS::smk::simple example")
+test_that("simple example", {
+    df <- data.frame(time = c(0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8), event = c(TRUE, FALSE, TRUE, FALSE, FALSE, TRUE, TRUE, FALSE), age = c(22, 23, 24, 25, 26, 27, 26, 28), y = c(100, 105, 110, 90, 95, 100, 100, 105))
 
-    expect_error(datadistDS(data = data_arg), "object 'data_obj' not found", fixed = TRUE)
-})
+    formula_obj <- "ssssstimerrr eventzzz ~ fd$age"
 
-context("datadistDS::arg::data is data.frame")
-test_that("data is data.frame", {
-    data_arg <- "data"
-    data     <- data.frame()
-
-    expect_error(datadistDS(data = data_arg), "you must specify individual variables or a data frame", fixed = TRUE)
+    # ToDo: Fix Error
+    # expect_error(survfitDS(formula = formula_obj), "invalid formula \"\\\"survival::Surv(time, event) ~ fd$age\\\"\": not a call", fixed = TRUE)
+    survfitDS(formula = formula_obj)
 })
 
 #
 # Done
 #
 
-context("datadistDS::arg::shutdown")
+context("survfitDS::smk::shutdown")
 
-context("datadistDS::arg::done")
+context("survfitDS::smk::done")
