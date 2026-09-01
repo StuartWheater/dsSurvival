@@ -5,3 +5,4 @@
 ^DAGStat_sofack \(1\).pdf$
 ^\.circleci$
 ^\.circleci/config\.yml$
+^inst/CITATION$

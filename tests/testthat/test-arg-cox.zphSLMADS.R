@@ -35,7 +35,7 @@ context("cox.zphSLMADS::arg::missing fit")
 test_that("missing fir", {
     fit_obj <- "fit_obj"
 
-    expect_error(cox.zphSLMADS(fit = fit_obj), "argument must be the result of Cox model fit", fixed = TRUE)
+    expect_error(cox.zphSLMADS(fit = fit_obj), "argument must be the result of a coxph or coxme fit", fixed = TRUE)
 })
 
 

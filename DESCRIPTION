@@ -6,7 +6,7 @@ Author: Soumya Banerjee, Demetris Avraam, Xavier Escriba Montagut, Juan Gonzalez
 Maintainer: Soumya Banerjee, Demetris Avraam, Xavier Escriba Montagut, Juan Gonzalez, Paul Burton and Tom R P Bishop <sb2333@cam.ac.uk>
 License: GPL-3
 Depends:
-    R (>= 3.5.0)
+    R (>= 4.1.0)
 Imports:
     survival (>= 3.2-11),
     dsBase,
@@ -21,6 +21,6 @@ Suggests:
     stringr,
     lme4,
     testthat
-RoxygenNote: 7.3.3
 Encoding: UTF-8
 VignetteBuilder: knitr
+Config/roxygen2/version: 8.1.0
